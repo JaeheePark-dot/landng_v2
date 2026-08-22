@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내 보장 점검하기 | 차실장의 보험살롱</title>
+<meta name="description" content="진단비·실손·후유장해까지, 지금 내가 가진 보장이 제대로 채워져 있는지 무료로 점검해 드립니다.">
+<meta name="robots" content="noindex, nofollow"><!-- ⚠️ 학습/테스트 중 검색엔진 차단. 실서비스 시 이 줄 삭제 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===================== 기본 설정 ===================== */
+:root{
+  --purple-900:#372259;
+  --purple-700:#5b4392;
+  --purple-600:#6d55a8;
+  --purple-500:#8570bd;
+  --purple-300:#b7a8dc;
+  --purple-100:#eae5f7;
+  --purple-50:#f6f4fc;
+  --text:#33303d;
+  --text-sub:#6f6a7d;
+  --line:#e6e1f2;
+  --white:#ffffff;
+  --good:#5ba87a;
+  --warn:#d9a13c;
+  --bad:#c96a7f;
+  --radius:18px;
+  --shadow-sm:0 4px 16px rgba(91,67,146,.08);
+  --shadow-md:0 12px 36px rgba(91,67,146,.13);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  color:var(--text);background:var(--white);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;border:none;}
+input,textarea,select{font-family:inherit;font-size:16px;}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 20px;}
+:focus-visible{outline:3px solid var(--purple-500);outline-offset:2px;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+
+/* ===== 데모 고지 배너 (실서비스 전환 시 이 블록 + 아래 HTML 삭제) ===== */
+.demo-banner{
+  background:#3d3450;color:#e6e0f5;text-align:center;
+  font-size:12.5px;padding:9px 16px;line-height:1.55;letter-spacing:-.2px;
+}
+.demo-banner b{color:#fff;}
+
+/* ===================== 헤더 ===================== */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px;}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:19px;color:var(--purple-700);letter-spacing:-.5px;}
+.logo-mark{
+  width:32px;height:32px;border-radius:10px;
+  background:linear-gradient(135deg,var(--purple-500),var(--purple-700));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:15px;font-weight:700;flex:0 0 32px;
+}
+.header-nav{display:flex;align-items:center;gap:26px;}
+.header-nav a{font-size:15px;color:var(--text-sub);font-weight:500;transition:.2s;}
+.header-nav a:hover{color:var(--purple-700);}
+.btn-header{
+  background:var(--purple-600);color:#fff;padding:10px 20px;border-radius:999px;
+  font-size:14px;font-weight:700;transition:.25s;
+}
+.btn-header:hover{background:var(--purple-700);transform:translateY(-1px);}
+@media(max-width:900px){.header-nav a{display:none;}}
+
+/* ===================== 히어로 ===================== */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--purple-50) 0%,var(--purple-100) 55%,#f3f0fb 100%);
+  padding:70px 0 90px;
+}
+.hero::before,.hero::after{content:'';position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(133,112,189,.22),transparent 70%);}
+.hero::before{width:420px;height:420px;top:-140px;right:-100px;}
+.hero::after{width:320px;height:320px;bottom:-130px;left:-80px;}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;background:var(--white);color:var(--purple-700);
+  padding:8px 16px;border-radius:999px;font-size:13.5px;font-weight:700;
+  box-shadow:var(--shadow-sm);margin-bottom:22px;transition:opacity .3s;
+}
+.badge i{width:7px;height:7px;border-radius:50%;background:#7ac598;display:inline-block;flex:0 0 7px;}
+.hero h1{font-size:46px;font-weight:900;line-height:1.28;letter-spacing:-1.6px;color:var(--purple-900);margin-bottom:20px;}
+.hero h1 .accent{color:var(--purple-600);position:relative;display:inline-block;}
+.hero h1 .accent::after{
+  content:'';position:absolute;left:0;right:0;bottom:4px;height:12px;
+  background:rgba(133,112,189,.22);z-index:-1;border-radius:3px;
+}
+.hero p.lead{font-size:17.5px;color:var(--text-sub);margin-bottom:30px;letter-spacing:-.3px;}
+.hero-check{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:34px;}
+.hero-check li{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:500;color:#4a4459;}
+.ck{
+  width:23px;height:23px;flex:0 0 23px;border-radius:50%;
+  background:var(--purple-600);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;
+}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--purple-600),var(--purple-700));
+  color:#fff;font-size:16px;font-weight:700;padding:16px 34px;border-radius:999px;
+  box-shadow:0 10px 24px rgba(91,67,146,.28);transition:.25s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(91,67,146,.34);}
+.btn-ghost{
+  background:var(--white);color:var(--purple-700);font-size:16px;font-weight:700;
+  padding:16px 30px;border-radius:999px;border:1.5px solid var(--purple-300);transition:.25s;
+}
+.btn-ghost:hover{background:var(--purple-50);}
+
+/* ===================== 신청 폼 카드 ===================== */
+.form-card{
+  background:var(--white);border-radius:24px;box-shadow:var(--shadow-md);
+  padding:34px 32px 30px;border:1px solid rgba(255,255,255,.7);
+}
+.form-card h2{font-size:23px;font-weight:900;color:var(--purple-900);letter-spacing:-.8px;margin-bottom:6px;}
+.form-card .sub{font-size:14.5px;color:var(--text-sub);margin-bottom:24px;}
+.hp-wrap{position:absolute!important;left:-9999px!important;top:-9999px!important;width:1px;height:1px;overflow:hidden;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:14px;font-weight:700;color:#4a4459;margin-bottom:7px;}
+.field label .req{color:var(--bad);margin-left:2px;}
+.field input,.field textarea,.field select{
+  width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:12px;
+  background:#fbfaff;color:var(--text);transition:.2s;outline:none;
+}
+.field textarea{resize:vertical;min-height:96px;line-height:1.6;}
+.field input::placeholder,.field textarea::placeholder{color:#a9a4b6;}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--purple-500);background:#fff;box-shadow:0 0 0 4px rgba(133,112,189,.13);
+}
+.field.error input,.field.error textarea{border-color:#d98da0;background:#fff8fa;}
+.err-msg{display:none;font-size:12.5px;color:#c25470;margin-top:6px;font-weight:500;}
+.field.error .err-msg{display:block;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.agree{display:flex;align-items:flex-start;gap:9px;background:var(--purple-50);border-radius:12px;padding:13px 14px;margin:4px 0 18px;}
+.agree input[type=checkbox]{width:18px;height:18px;flex:0 0 18px;margin-top:2px;accent-color:var(--purple-600);cursor:pointer;}
+.agree label{font-size:13px;color:var(--text-sub);line-height:1.55;cursor:pointer;}
+.agree label b{color:var(--purple-700);}
+.agree-more{background:none;padding:0;margin-top:6px;font-size:12px;color:var(--purple-600);text-decoration:underline;}
+.field.error.agree{background:#fff8fa;box-shadow:0 0 0 1.5px #d98da0;}
+.form-alert{
+  display:none;align-items:flex-start;gap:8px;background:#fff4f6;border:1px solid #f0c8d2;
+  border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:13.5px;color:#b04a63;line-height:1.6;
+}
+.form-alert.show{display:flex;}
+/* 체크리스트 결과가 폼에 반영될 때 표시되는 칩 */
+.ck-chip{
+  display:none;align-items:center;gap:8px;background:var(--purple-50);
+  border:1px dashed var(--purple-300);border-radius:10px;padding:10px 12px;
+  font-size:13px;color:var(--purple-700);margin-bottom:14px;font-weight:500;
+}
+.ck-chip.show{display:flex;}
+.btn-submit{
+  width:100%;padding:17px;background:linear-gradient(135deg,var(--purple-600),var(--purple-700));
+  color:#fff;font-size:17px;font-weight:700;letter-spacing:-.4px;border-radius:14px;
+  box-shadow:0 10px 22px rgba(91,67,146,.26);transition:.25s;
+}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(91,67,146,.32);}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.form-note{text-align:center;font-size:12.5px;color:#9a95a8;margin-top:13px;}
+
+/* ===================== 신뢰 지표 ===================== */
+.stats{background:var(--white);padding:52px 0;border-bottom:1px solid var(--line);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
+.stat strong{display:block;font-size:36px;font-weight:900;color:var(--purple-600);letter-spacing:-1.5px;line-height:1.2;}
+.stat span{font-size:14.5px;color:var(--text-sub);font-weight:500;}
+
+/* ===================== 공통 섹션 ===================== */
+section.block{padding:88px 0;}
+.section-head{text-align:center;max-width:660px;margin:0 auto 52px;}
+.tag{display:inline-block;background:var(--purple-100);color:var(--purple-700);font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;margin-bottom:14px;}
+.section-head h2{font-size:34px;font-weight:900;color:var(--purple-900);letter-spacing:-1.2px;line-height:1.35;margin-bottom:12px;}
+.section-head p{font-size:16.5px;color:var(--text-sub);}
+.bg-soft{background:var(--purple-50);}
+
+/* ============================================================
+   🆕 스크롤 유도 큐
+============================================================ */
+.scroll-cue{display:flex;justify-content:center;margin-top:44px;position:relative;z-index:2;}
+.scroll-cue button{
+  background:#fff;border:1px solid var(--line);border-radius:999px;padding:12px 26px;
+  font-size:14.5px;font-weight:600;color:var(--text-sub);display:flex;align-items:center;gap:9px;
+  box-shadow:var(--shadow-sm);transition:.2s;
+}
+.scroll-cue button:hover{border-color:var(--purple-300);color:var(--purple-700);}
+.scroll-cue .arw{animation:bob 1.5s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
+
+/* ============================================================
+   🆕 3탭 섹션
+============================================================ */
+.tabs-nav{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  position:sticky;top:68px;z-index:90;background:#fff;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:var(--shadow-sm);margin-bottom:8px;
+}
+.tab-btn{
+  background:none;padding:19px 8px;font-size:16.5px;font-weight:700;
+  color:#a09aae;letter-spacing:-.4px;position:relative;transition:.2s;
+}
+.tab-btn:hover{color:var(--text-sub);}
+.tab-btn[aria-selected="true"]{color:var(--purple-700);background:var(--purple-50);}
+.tab-btn[aria-selected="true"]::after{
+  content:'';position:absolute;left:12%;right:12%;bottom:0;height:3px;
+  background:var(--purple-600);border-radius:3px 3px 0 0;
+}
+.tab-panel{padding:52px 0 0;animation:fade .32s ease;}
+.tab-panel[hidden]{display:none;}
+@keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.panel-intro{max-width:680px;margin:0 auto 42px;text-align:center;}
+.panel-intro h3{font-size:27px;font-weight:900;color:var(--purple-900);letter-spacing:-1px;margin-bottom:10px;line-height:1.4;}
+.panel-intro p{font-size:16px;color:var(--text-sub);}
+
+/* --- 탭1 : 보장 종류 카드 --- */
+.cov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.cov{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px 24px;transition:.26s;
+}
+.cov:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--purple-300);}
+.cov .ico{
+  width:50px;height:50px;border-radius:15px;
+  background:linear-gradient(135deg,var(--purple-100),#ded6f2);
+  display:flex;align-items:center;justify-content:center;font-size:23px;margin-bottom:16px;
+}
+.cov h4{font-size:18.5px;font-weight:700;color:var(--purple-900);margin-bottom:8px;letter-spacing:-.5px;}
+.cov p{font-size:14.5px;color:var(--text-sub);line-height:1.7;margin-bottom:14px;}
+.cov .chips{display:flex;flex-wrap:wrap;gap:6px;}
+.cov .chips span{
+  background:var(--purple-50);color:var(--purple-700);font-size:12px;font-weight:600;
+  padding:4px 10px;border-radius:999px;
+}
+.cov .type{
+  display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;
+  border-radius:6px;margin-bottom:11px;
+}
+.type-fixed{background:#e8f2ec;color:#3d7a58;}
+.type-real{background:#eaeef8;color:#45598f;}
+
+/* 정액 vs 실손 비교 */
+.vs{
+  margin-top:36px;display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;
+}
+.vs-col h5{font-size:16.5px;font-weight:800;color:var(--purple-900);margin-bottom:4px;}
+.vs-col .kicker{font-size:12px;font-weight:700;margin-bottom:14px;display:inline-block;padding:3px 9px;border-radius:6px;}
+.vs-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.vs-col li{font-size:14px;color:var(--text-sub);padding-left:16px;position:relative;line-height:1.6;}
+.vs-col li::before{content:'·';position:absolute;left:5px;color:var(--purple-500);font-weight:900;}
+.vs-div{width:1px;background:var(--line);}
+
+/* --- 탭2 : 점검 포인트 블록 --- */
+.point{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:42px 0;}
+.point+.point{border-top:1px solid var(--line);}
+.point:nth-child(even) .point-txt{order:2;}
+.point-txt .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:10px;background:var(--purple-600);color:#fff;
+  font-size:15px;font-weight:900;margin-bottom:14px;
+}
+.point-txt h4{font-size:26px;font-weight:900;color:var(--purple-900);letter-spacing:-1px;line-height:1.4;margin-bottom:12px;}
+.point-txt p{font-size:15.5px;color:var(--text-sub);line-height:1.8;}
+.point-txt .hint{
+  margin-top:16px;background:var(--purple-50);border-left:3px solid var(--purple-500);
+  border-radius:0 10px 10px 0;padding:13px 15px;font-size:14px;color:var(--purple-700);line-height:1.7;
+}
+.point-vis{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px 24px;min-height:250px;display:flex;flex-direction:column;justify-content:center;gap:16px;
+}
+.vis-title{font-size:13px;font-weight:700;color:var(--text-sub);display:flex;align-items:center;gap:6px;}
+.vis-title::before{content:'✓';color:var(--purple-500);font-weight:900;}
+
+/* 중복 보장 시각화 */
+.dup{display:flex;flex-direction:column;gap:10px;}
+.dup-row{display:flex;align-items:center;gap:10px;}
+.dup-row .nm{flex:0 0 82px;font-size:13px;font-weight:700;color:#4a4459;}
+.dup-bar{flex:1;height:26px;background:var(--purple-50);border-radius:7px;position:relative;overflow:hidden;}
+.dup-bar i{position:absolute;top:0;bottom:0;border-radius:7px;}
+.dup-note{font-size:12.5px;color:var(--bad);font-weight:600;text-align:right;}
+
+/* 보장 공백 바 차트 */
+.gap-list{display:flex;flex-direction:column;gap:13px;}
+.gap-item .top{display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;margin-bottom:6px;}
+.gap-item .top em{font-style:normal;font-weight:700;}
+.gap-track{height:9px;background:#eee9f6;border-radius:99px;overflow:hidden;}
+.gap-fill{height:100%;border-radius:99px;}
+
+/* 보험료 게이지 */
+.gauge{padding:6px 0;}
+.gauge-track{
+  height:16px;border-radius:99px;overflow:hidden;display:flex;
+  background:#eee9f6;
+}
+.gauge-track i{height:100%;}
+.gauge-scale{display:flex;justify-content:space-between;font-size:11.5px;color:#9a95a8;margin-top:7px;}
+.gauge-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;}
+.gauge-legend span{display:flex;align-items:center;gap:6px;color:var(--text-sub);}
+.gauge-legend b{width:10px;height:10px;border-radius:3px;display:inline-block;}
+
+/* 갱신 타임라인 */
+.tl{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:flex;gap:14px;position:relative;padding-bottom:20px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:'';position:absolute;left:9px;top:22px;bottom:0;width:2px;background:var(--line);
+}
+.tl-item:last-child::before{display:none;}
+.tl-dot{
+  width:20px;height:20px;flex:0 0 20px;border-radius:50%;background:#fff;
+  border:2.5px solid var(--purple-500);z-index:1;margin-top:2px;
+}
+.tl-item.warn .tl-dot{border-color:var(--warn);}
+.tl-body strong{display:block;font-size:14.5px;font-weight:700;color:var(--purple-900);}
+.tl-body span{font-size:13px;color:var(--text-sub);}
+
+/* --- 탭3 : 보장 Q&A --- */
+.cq{max-width:820px;margin:0 auto;border-top:2px solid var(--purple-900);}
+.cq-item{border-bottom:1px solid var(--line);}
+.cq-q{
+  width:100%;background:none;text-align:left;padding:22px 46px 22px 42px;
+  font-size:16.5px;font-weight:700;color:var(--purple-900);position:relative;
+  letter-spacing:-.4px;line-height:1.5;
+}
+.cq-q::before{content:'Q';position:absolute;left:8px;top:21px;color:var(--purple-600);font-size:17px;font-weight:900;}
+.cq-q::after{
+  content:'';position:absolute;right:14px;top:29px;width:9px;height:9px;
+  border-right:2px solid #a09aae;border-bottom:2px solid #a09aae;
+  transform:rotate(45deg);transition:transform .25s;
+}
+.cq-q[aria-expanded="true"]{color:var(--purple-600);}
+.cq-q[aria-expanded="true"]::after{transform:rotate(-135deg);border-color:var(--purple-600);}
+.cq-a{padding:0 18px 24px 42px;font-size:15px;color:var(--text-sub);line-height:1.8;position:relative;word-break:keep-all;}
+.cq-a::before{content:'A';position:absolute;left:8px;top:0;color:#b7b1c2;font-size:17px;font-weight:900;}
+.cq-a[hidden]{display:none;}
+.cq-a strong{color:var(--purple-700);}
+
+/* ============================================================
+   🆕 문서 버튼 3종
+============================================================ */
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px;}
+.doc-btn{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:24px 18px;text-align:left;transition:.24s;display:flex;align-items:center;gap:14px;
+}
+.doc-btn:hover{border-color:var(--purple-300);box-shadow:var(--shadow-md);transform:translateY(-3px);}
+.doc-btn .di{
+  width:44px;height:44px;flex:0 0 44px;border-radius:13px;
+  background:linear-gradient(135deg,var(--purple-100),#ded6f2);
+  display:flex;align-items:center;justify-content:center;font-size:21px;
+}
+.doc-btn strong{display:block;font-size:16px;font-weight:800;color:var(--purple-900);letter-spacing:-.4px;}
+.doc-btn span{font-size:12.5px;color:#9a95a8;}
+
+/* ===================== 진행 절차 ===================== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.step{position:relative;text-align:center;padding:0 8px;}
+.step .num{
+  width:56px;height:56px;margin:0 auto 16px;border-radius:50%;
+  background:var(--white);border:2px solid var(--purple-300);
+  color:var(--purple-600);font-size:20px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);
+}
+.step h4{font-size:17px;font-weight:700;color:var(--purple-900);margin-bottom:7px;}
+.step p{font-size:14.5px;color:var(--text-sub);}
+.step:not(:last-child)::after{content:'';position:absolute;top:28px;right:-10px;width:20px;height:2px;background:var(--purple-300);}
+
+/* ===================== 사례 카드 ===================== */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.case{
+  background:var(--white);border-radius:var(--radius);padding:26px 24px;
+  border:1px solid var(--line);box-shadow:var(--shadow-sm);
+}
+.case .who{
+  display:inline-block;background:var(--purple-100);color:var(--purple-700);
+  font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:999px;margin-bottom:14px;
+}
+.case h4{font-size:17px;font-weight:800;color:var(--purple-900);margin-bottom:10px;letter-spacing:-.4px;line-height:1.5;}
+.case dl{display:flex;flex-direction:column;gap:11px;}
+.case dt{font-size:12.5px;font-weight:700;color:#9a95a8;margin-bottom:3px;}
+.case dd{font-size:14.5px;color:#4a4459;line-height:1.7;}
+.case dd.res{color:var(--purple-700);font-weight:600;}
+.sample-note{text-align:center;font-size:12.5px;color:#9a95a8;margin-top:26px;line-height:1.7;}
+
+/* ===================== FAQ ===================== */
+.faq{max-width:780px;margin:0 auto;}
+.faq-item{background:var(--white);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:.2s;}
+.faq-item.open{border-color:var(--purple-300);box-shadow:var(--shadow-sm);}
+.faq-q{
+  width:100%;background:none;text-align:left;padding:20px 22px;
+  font-size:16.5px;font-weight:700;color:var(--purple-900);
+  display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.4px;
+}
+.faq-q .arrow{color:var(--purple-500);font-size:14px;transition:.28s;flex:0 0 auto;}
+.faq-item.open .arrow{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-a p{padding:0 22px 20px;font-size:15px;color:var(--text-sub);line-height:1.75;}
+
+/* ===================== 하단 CTA ===================== */
+.cta-band{
+  background:linear-gradient(135deg,var(--purple-700),var(--purple-900));
+  color:#fff;padding:74px 0;text-align:center;position:relative;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;width:460px;height:460px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.09),transparent 70%);
+  top:-200px;left:50%;transform:translateX(-50%);
+}
+.cta-band h2{font-size:32px;font-weight:900;letter-spacing:-1.2px;margin-bottom:14px;position:relative;}
+.cta-band p{font-size:17px;color:rgba(255,255,255,.82);margin-bottom:30px;position:relative;}
+.btn-white{
+  position:relative;background:#fff;color:var(--purple-700);font-size:17px;font-weight:800;
+  padding:17px 44px;border-radius:999px;box-shadow:0 12px 28px rgba(0,0,0,.2);
+  transition:.25s;display:inline-block;
+}
+.btn-white:hover{transform:translateY(-2px);}
+
+/* ===================== 푸터 ===================== */
+footer{background:#2c2438;color:#a9a3b8;padding:48px 0 34px;font-size:13.5px;}
+.footer-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:22px;}
+.footer-logo{color:#fff;font-size:18px;font-weight:900;margin-bottom:10px;}
+.footer-top p{line-height:1.9;max-width:540px;}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{color:#cfc9dd;transition:.2s;}
+.footer-links a:hover{color:#fff;}
+.footer-links button{background:none;color:#cfc9dd;font-size:13.5px;padding:0;}
+.footer-links button:hover{color:#fff;}
+.copyright{color:#7d7690;font-size:12.5px;line-height:1.8;}
+
+/* ===================== 모바일 고정바 ===================== */
+.mobile-bar{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:120;
+  padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.96);border-top:1px solid var(--line);backdrop-filter:blur(8px);
+  gap:9px;
+}
+.mobile-bar .mb-ghost{
+  flex:0 0 40%;padding:15px 8px;border-radius:12px;background:#fff;
+  border:1.5px solid var(--purple-300);color:var(--purple-700);font-size:15px;font-weight:700;
+}
+.mobile-bar .mb-main{
+  flex:1;padding:15px;border-radius:12px;
+  background:linear-gradient(135deg,var(--purple-600),var(--purple-700));
+  color:#fff;font-size:15.5px;font-weight:700;
+}
+
+/* ===================== 모달 (공통) ===================== */
+.modal{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(44,36,56,.55);backdrop-filter:blur(3px);
+  align-items:center;justify-content:center;padding:20px;
+}
+.modal.show{display:flex;}
+/* 완료 모달(소형) */
+.modal-box{
+  background:#fff;border-radius:22px;padding:40px 32px 32px;max-width:400px;width:100%;
+  text-align:center;box-shadow:var(--shadow-lg);animation:pop .28s ease;
+}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:none;}}
+.modal-ico{
+  width:66px;height:66px;margin:0 auto 20px;border-radius:50%;
+  background:linear-gradient(135deg,var(--purple-500),var(--purple-700));
+  color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center;
+}
+.modal-box h3{font-size:22px;font-weight:900;color:var(--purple-900);margin-bottom:11px;letter-spacing:-.6px;}
+.modal-box p{font-size:15px;color:var(--text-sub);line-height:1.7;margin-bottom:26px;}
+.modal-box>button{
+  width:100%;padding:15px;border-radius:12px;background:var(--purple-600);
+  color:#fff;font-size:16px;font-weight:700;
+}
+/* 정보 모달(대형·스크롤) */
+.modal-lg{
+  background:#fff;border-radius:22px;width:100%;max-width:720px;max-height:88vh;
+  display:flex;flex-direction:column;box-shadow:var(--shadow-lg);animation:pop .28s ease;overflow:hidden;
+}
+.ml-head{padding:26px 28px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex:none;}
+.ml-head h3{font-size:22px;font-weight:900;color:var(--purple-900);letter-spacing:-.6px;line-height:1.4;}
+.ml-head p{font-size:13.5px;color:var(--text-sub);margin-top:5px;}
+.ml-x{background:none;font-size:26px;line-height:1;color:#9a95a8;padding:2px 7px;border-radius:8px;flex:none;}
+.ml-x:hover{background:var(--purple-50);color:var(--purple-700);}
+.ml-body{padding:0 28px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;}
+.ml-foot{padding:18px 28px 24px;flex:none;border-top:1px solid var(--line);background:#fff;}
+.ml-foot .row{display:flex;gap:10px;}
+.ml-foot button{padding:15px;border-radius:12px;font-size:15.5px;font-weight:700;}
+.ml-foot .b-main{flex:1;background:linear-gradient(135deg,var(--purple-600),var(--purple-700));color:#fff;}
+.ml-foot .b-sub{flex:0 0 34%;background:#fff;border:1.5px solid var(--line);color:var(--text-sub);}
+.ml-body h4{font-size:16.5px;font-weight:800;color:var(--purple-900);margin:24px 0 8px;}
+.ml-body h4:first-child{margin-top:0;}
+.ml-body ul{padding-left:19px;margin:0 0 16px;font-size:14.5px;color:#4a4459;}
+.ml-body ul li{margin-bottom:9px;line-height:1.75;word-break:keep-all;}
+.ml-body .caution{
+  background:#fff8f0;border:1px solid #f0dcc0;border-radius:12px;
+  padding:14px 16px;font-size:13px;color:#8a6a3a;line-height:1.75;margin-top:18px;
+}
+
+/* 체크리스트 모달 */
+.cl-list{display:flex;flex-direction:column;gap:8px;padding:4px 0 8px;}
+.cl-item{
+  display:flex;align-items:flex-start;gap:11px;background:#fbfaff;
+  border:1.5px solid var(--line);border-radius:12px;padding:14px 15px;
+  cursor:pointer;transition:.18s;
+}
+.cl-item:hover{border-color:var(--purple-300);}
+.cl-item input{width:19px;height:19px;flex:0 0 19px;margin-top:2px;accent-color:var(--purple-600);cursor:pointer;}
+.cl-item span{font-size:14.5px;color:#4a4459;line-height:1.6;}
+.cl-item:has(input:checked){background:var(--purple-50);border-color:var(--purple-500);}
+.cl-item:has(input:checked) span{color:var(--purple-900);font-weight:500;}
+.cl-result{
+  background:var(--purple-50);border-radius:14px;padding:18px 20px;margin:18px 0 4px;text-align:center;
+}
+.cl-result .cnt{font-size:15px;color:var(--text-sub);margin-bottom:8px;}
+.cl-result .cnt b{font-size:28px;font-weight:900;color:var(--purple-600);vertical-align:-2px;}
+.cl-result .msg{font-size:14.5px;color:var(--purple-900);font-weight:600;line-height:1.7;}
+
+/* 용어 사전 */
+.gl{display:flex;flex-direction:column;gap:0;}
+.gl-item{padding:16px 0;border-bottom:1px solid var(--line);}
+.gl-item:last-child{border-bottom:none;}
+.gl-item dt{font-size:15.5px;font-weight:800;color:var(--purple-900);margin-bottom:5px;}
+.gl-item dd{font-size:14.5px;color:var(--text-sub);line-height:1.75;word-break:keep-all;}
+
+/* ===================== 반응형 ===================== */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .hero h1{font-size:38px;}
+  .cov-grid,.cases{grid-template-columns:1fr 1fr;}
+  .steps{grid-template-columns:1fr 1fr;row-gap:34px;}
+  .step:nth-child(2)::after{display:none;}
+  .stats-grid{grid-template-columns:1fr 1fr;row-gap:30px;}
+  .point{grid-template-columns:1fr;gap:26px;padding:34px 0;}
+  .point:nth-child(even) .point-txt{order:0;}
+  .point-vis{order:2;}
+  .vs{grid-template-columns:1fr;gap:22px;}
+  .vs-div{width:auto;height:1px;}
+  .docs{grid-template-columns:1fr;}
+  .tabs-nav{position:static;}
+}
+@media(max-width:640px){
+  .hero{padding:44px 0 56px;}
+  .hero h1{font-size:29px;letter-spacing:-1.2px;}
+  .hero p.lead{font-size:16px;}
+  .hero-cta{display:none;}
+  .form-card{padding:26px 20px 24px;}
+  section.block{padding:58px 0;}
+  .section-head{margin-bottom:36px;}
+  .section-head h2{font-size:25px;}
+  .section-head p{font-size:15.5px;}
+  .cov-grid,.cases,.steps{grid-template-columns:1fr;}
+  .step::after{display:none!important;}
+  .stat strong{font-size:29px;}
+  .cta-band h2{font-size:24px;}
+  .cta-band{padding:54px 0;}
+  .row2{grid-template-columns:1fr;}
+  .mobile-bar{display:flex;}
+  body{padding-bottom:78px;}
+  .btn-header{display:none;}
+  .logo{font-size:16px;}
+  .tab-btn{font-size:13.5px;padding:15px 4px;}
+  .tab-panel{padding-top:36px;}
+  .panel-intro h3{font-size:21px;}
+  .point-txt h4{font-size:21px;}
+  .cq-q{font-size:15px;padding:19px 40px 19px 36px;}
+  .cq-a{font-size:14.5px;padding-left:36px;}
+  .modal{padding:0;align-items:flex-end;}
+  .modal-lg{max-width:none;max-height:92vh;border-radius:20px 20px 0 0;}
+  .ml-head{padding:20px 18px 12px;}
+  .ml-head h3{font-size:19px;}
+  .ml-body{padding:0 18px;}
+  .ml-foot{padding:14px 18px 20px;}
+  .ml-foot .row{flex-direction:column;}
+  .ml-foot .b-sub{flex:none;}
+  .modal-box{border-radius:20px 20px 0 0;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     ⚠️ 데모/학습 고지 배너
+     실제 보험 모집 자격 확보 후 정식 운영할 때만 이 <div>를 삭제하세요.
+============================================================ -->
+<div class="demo-banner">
+  ⚠️ 본 페이지는 <b>학습·포트폴리오용 예시</b>입니다. 실제 보험 모집·계약 체결을 하지 않으며, 표시된 사례는 가상입니다.
+</div>
+
+<!-- ================= 헤더 ================= -->
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <span class="logo-mark">차</span>
+      <span>차실장의 보험살롱</span>
+    </div>
+    <nav class="header-nav">
+      <a href="#coverage">보장 바로알기</a>
+      <a href="#how">진행절차</a>
+      <a href="#case">점검 사례</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <button class="btn-header" type="button" onclick="goForm()">무료 보장 점검</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= 히어로 + 신청폼 ================= -->
+<section class="hero">
+  <div class="wrap hero-inner">
+
+    <div class="hero-copy">
+      <div class="badge">
+        <i></i> <span id="badgeText">지금 <b>무료</b>로 보장 점검받을 수 있어요</span>
+      </div>
+
+      <h1>보험료보다 먼저,<br><span class="accent">내 보장</span>을 확인하세요</h1>
+      <p class="lead">
+        진단비·실손·후유장해·배상책임까지.<br>
+        지금 가진 보장이 어디까지 채워져 있는지 정리해 드립니다.
+      </p>
+      <ul class="hero-check">
+        <li><span class="ck">✓</span> 특정 상품 권유가 아닌 <strong>보장 구조 진단</strong></li>
+        <li><span class="ck">✓</span> 중복·공백·과납 구간을 한 장으로 정리</li>
+        <li><span class="ck">✓</span> 유지가 낫다면 “그대로 두세요”라고 말씀드립니다</li>
+      </ul>
+      <div class="hero-cta">
+        <button class="btn-primary" type="button" onclick="goForm()">무료 보장 점검 신청 →</button>
+        <button class="btn-ghost" type="button" onclick="openInfo('mChecklist')">1분 자가진단 해보기</button>
+      </div>
+    </div>
+
+    <!-- 신청 폼 -->
+    <div class="form-card" id="apply">
+      <h2>무료 보장 점검 신청</h2>
+      <p class="sub">아래 정보를 남겨주시면 전문 설계사가 연락드립니다.</p>
+
+      <form id="diagForm" novalidate>
+
+        <!-- 허니팟 (봇 감지) — 삭제하지 마세요 -->
+        <div class="hp-wrap" aria-hidden="true">
+          <label>회사명
+            <input type="text" id="hp" name="company" tabindex="-1" autocomplete="off">
+          </label>
+        </div>
+
+        <div class="form-alert" id="formAlert">
+          <span>⚠️</span><span id="formAlertText"></span>
+        </div>
+
+        <!-- 자가진단 결과 연동 칩 -->
+        <div class="ck-chip" id="ckChip">
+          <span>📋</span><span id="ckChipText"></span>
+        </div>
+
+        <div class="field" id="f-name">
+          <label for="name">이름 <span class="req">*</span></label>
+          <input type="text" id="name" name="name" placeholder="홍길동" autocomplete="off" maxlength="20">
+          <span class="err-msg">이름을 2자 이상 입력해 주세요.</span>
+        </div>
+
+        <div class="row2">
+          <div class="field" id="f-age">
+            <label for="age">나이 <span class="req">*</span></label>
+            <input type="text" id="age" name="age" placeholder="35" inputmode="numeric" maxlength="3" autocomplete="off">
+            <span class="err-msg">나이를 확인해 주세요.</span>
+          </div>
+          <div class="field" id="f-gender">
+            <label for="gender">성별</label>
+            <select id="gender" name="gender">
+              <option value="">선택 안 함</option>
+              <option value="남성">남성</option>
+              <option value="여성">여성</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field" id="f-phone">
+          <label for="phone">전화번호 <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" maxlength="13" inputmode="numeric" autocomplete="off">
+          <span class="err-msg">올바른 휴대폰 번호를 입력해 주세요.</span>
+        </div>
+
+        <!-- 🆕 관심 보장 영역 -->
+        <div class="field" id="f-interest">
+          <label for="interest">가장 궁금한 보장</label>
+          <select id="interest" name="interest">
+            <option value="">전체 점검 원해요</option>
+            <option value="진단비">진단비 (암·뇌·심장)</option>
+            <option value="실손의료비">실손의료비</option>
+            <option value="수술입원">수술·입원 보장</option>
+            <option value="후유장해">후유장해</option>
+            <option value="소득보장">치료 중 생활비·소득 보장</option>
+            <option value="배상책임">일상 배상책임</option>
+            <option value="자녀가족">자녀·가족 보장</option>
+          </select>
+        </div>
+
+        <div class="field" id="f-msg">
+          <label for="message">궁금한 점</label>
+          <textarea id="message" name="message" maxlength="1000" placeholder="예) 실손보험 갱신 보험료가 너무 올라서 고민입니다. 진단비 보장도 같이 봐주실 수 있나요?"></textarea>
+        </div>
+
+        <div class="field agree" id="f-agree">
+          <input type="checkbox" id="agree" name="agree">
+          <div>
+            <label for="agree">
+              <b>[필수]</b> 개인정보 수집·이용에 동의합니다.
+              수집 항목: 이름, 나이, 성별, 연락처, 관심 보장, 문의내용 / 목적: 보장 점검 상담 / 보유기간: 상담 종료 후 3개월
+            </label>
+            <button type="button" class="agree-more" onclick="openInfo('mPrivacy')">동의 내용 전문 보기</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">무료로 보장 점검받기</button>
+        <p class="form-note">🔒 입력하신 정보는 상담 목적 외 절대 사용되지 않습니다.</p>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- 스크롤 유도 -->
+  <div class="wrap scroll-cue">
+    <button type="button" onclick="scrollToId('coverage')">
+      보장에 대해 더 알아보기 <span class="arw">↓</span>
+    </button>
+  </div>
+</section>
+
+<!-- ================= 신뢰 지표 =================
+     ⚠️ 검증 가능한 사실만 표기하세요. 근거 없는 수치는 표시광고법 위반 소지.
+================================================= -->
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat"><strong>1:1</strong><span>전담 설계사 배정</span></div>
+    <div class="stat"><strong>무료</strong><span>보장 진단 리포트</span></div>
+    <div class="stat"><strong>0원</strong><span>상담 비용</span></div>
+    <div class="stat"><strong>강요 없음</strong><span>가입은 고객 선택</span></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     🆕 3탭 섹션 : 보장 바로 알기
+============================================================ -->
+<section class="block" id="coverage">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">보장 바로 알기</span>
+      <h2>내 보험이 아니라,<br>내 <em style="color:var(--purple-600);font-style:normal">보장</em>을 이해하는 것부터</h2>
+      <p>상품 이름은 몰라도 괜찮습니다. 어떤 상황에서 어떤 돈이 나오는지만 알면 충분합니다.</p>
+    </div>
+
+    <div class="tabs-nav" role="tablist" aria-label="보장 정보">
+      <button class="tab-btn" role="tab" id="tab1" aria-controls="panel1" aria-selected="true">보장의 종류</button>
+      <button class="tab-btn" role="tab" id="tab2" aria-controls="panel2" aria-selected="false">내 보장 점검 포인트</button>
+      <button class="tab-btn" role="tab" id="tab3" aria-controls="panel3" aria-selected="false">보장 Q&amp;A</button>
+    </div>
+
+    <!-- ───────── 탭1 : 보장의 종류 ───────── -->
+    <div class="tab-panel" id="panel1" role="tabpanel" aria-labelledby="tab1" tabindex="0">
+      <div class="panel-intro">
+        <h3>보장은 크게 6가지로 나뉩니다</h3>
+        <p>내가 어떤 보장을 갖고 있고, 어떤 보장이 비어 있는지 여기서 먼저 확인해 보세요.</p>
+      </div>
+
+      <div class="cov-grid">
+        <div class="cov">
+          <div class="ico">🩺</div>
+          <span class="type type-fixed">정액 보장</span>
+          <h4>진단비</h4>
+          <p>약관에서 정한 질병으로 진단이 확정되면, 실제 치료비와 무관하게 정해진 금액을 한 번에 받습니다.</p>
+          <div class="chips"><span>암</span><span>뇌질환</span><span>심장질환</span></div>
+        </div>
+        <div class="cov">
+          <div class="ico">🏥</div>
+          <span class="type type-fixed">정액 보장</span>
+          <h4>수술·입원비</h4>
+          <p>수술을 받거나 입원한 일수에 따라 지급됩니다. 진단비가 못 메우는 치료 과정의 공백을 보완합니다.</p>
+          <div class="chips"><span>수술 1~5종</span><span>입원 일당</span></div>
+        </div>
+        <div class="cov">
+          <div class="ico">🧾</div>
+          <span class="type type-real">실손 보장</span>
+          <h4>실손의료비</h4>
+          <p>병원에서 실제 부담한 금액을 자기부담금을 제외하고 보상합니다. 여러 개 가입해도 중복 보상되지 않습니다.</p>
+          <div class="chips"><span>급여</span><span>비급여</span><span>통원</span></div>
+        </div>
+        <div class="cov">
+          <div class="ico">🦴</div>
+          <span class="type type-fixed">정액 보장</span>
+          <h4>후유장해</h4>
+          <p>치료 후에도 남는 장해 정도(장해율)에 따라 가입금액의 일정 비율을 지급합니다. 의외로 활용도가 높은 보장입니다.</p>
+          <div class="chips"><span>3~100%</span><span>질병·상해</span></div>
+        </div>
+        <div class="cov">
+          <div class="ico">💼</div>
+          <span class="type type-fixed">정액 보장</span>
+          <h4>소득·생활비 보장</h4>
+          <p>치료로 일을 못 하는 기간의 소득 공백을 메웁니다. 치료비만 준비한 분들이 가장 자주 놓치는 영역입니다.</p>
+          <div class="chips"><span>생활자금</span><span>간병</span></div>
+        </div>
+        <div class="cov">
+          <div class="ico">🛡️</div>
+          <span class="type type-real">실손 보장</span>
+          <h4>일상 배상책임</h4>
+          <p>일상에서 타인이나 타인의 물건에 피해를 입혔을 때 법률상 배상책임을 보상합니다. 보험료 대비 효율이 높습니다.</p>
+          <div class="chips"><span>일상생활</span><span>가족</span><span>반려동물</span></div>
+        </div>
+      </div>
+
+      <!-- 정액 vs 실손 -->
+      <div class="vs">
+        <div class="vs-col">
+          <span class="kicker type-fixed">정액 보장</span>
+          <h5>진단·수술·장해 등</h5>
+          <ul>
+            <li>조건 충족 시 <strong>정해진 금액</strong>을 지급</li>
+            <li>치료비 외 생활비·간병비로 자유롭게 사용</li>
+            <li><strong>여러 건 가입 시 각각 지급</strong>(중복 수령 가능)</li>
+            <li>진단 요건·면책기간을 반드시 확인해야 함</li>
+          </ul>
+        </div>
+        <div class="vs-div" aria-hidden="true"></div>
+        <div class="vs-col">
+          <span class="kicker type-real">실손 보장</span>
+          <h5>실손의료비·배상책임 등</h5>
+          <ul>
+            <li>실제 지출한 금액을 <strong>한도 내에서 보상</strong></li>
+            <li>자기부담금이 발생</li>
+            <li><strong>여러 건 가입해도 중복 보상 안 됨</strong> (비례 분담)</li>
+            <li>갱신 시 보험료 변동 폭이 큼</li>
+          </ul>
+        </div>
+      </div>
+      <p class="sample-note">※ 위 분류는 이해를 돕기 위한 일반적인 설명입니다. 실제 보장 여부와 지급 조건은 개별 약관에 따릅니다.</p>
+    </div>
+
+    <!-- ───────── 탭2 : 점검 포인트 ───────── -->
+    <div class="tab-panel" id="panel2" role="tabpanel" aria-labelledby="tab2" tabindex="0" hidden>
+      <div class="panel-intro">
+        <h3>점검은 이 4가지 축으로 합니다</h3>
+        <p>보험을 새로 드는 것보다, 지금 있는 보장을 제대로 배치하는 게 먼저입니다.</p>
+      </div>
+
+      <!-- 1. 중복 -->
+      <div class="point">
+        <div class="point-txt">
+          <span class="num">1</span>
+          <h4>중복 보장</h4>
+          <p>같은 위험에 대비하는 보장이 여러 보험에 겹쳐 있으면, 보험료는 두 배로 내지만 받는 돈은 그대로일 수 있습니다.
+             특히 실손의료비는 여러 개 가입해도 중복 보상되지 않습니다.</p>
+          <p class="hint">💡 정액 보장(진단비)은 중복 수령이 가능하지만, 실손 보장은 비례 분담됩니다. 이 차이를 모르면 새는 보험료가 생깁니다.</p>
+        </div>
+        <div class="point-vis">
+          <p class="vis-title">겹쳐 있는 보장 예시</p>
+          <div class="dup">
+            <div class="dup-row">
+              <span class="nm">A 보험</span>
+              <span class="dup-bar"><i style="left:0;width:62%;background:var(--purple-500)"></i></span>
+            </div>
+            <div class="dup-row">
+              <span class="nm">B 보험</span>
+              <span class="dup-bar"><i style="left:38%;width:62%;background:var(--purple-300)"></i></span>
+            </div>
+            <div class="dup-row">
+              <span class="nm" style="color:var(--bad)">겹친 구간</span>
+              <span class="dup-bar"><i style="left:38%;width:24%;background:repeating-linear-gradient(45deg,#e8a8b8,#e8a8b8 6px,#f3cdd6 6px,#f3cdd6 12px)"></i></span>
+            </div>
+          </div>
+          <p class="dup-note">↑ 이 구간의 보험료가 효율을 잃습니다</p>
+        </div>
+      </div>
+
+      <!-- 2. 공백 -->
+      <div class="point">
+        <div class="point-txt">
+          <span class="num">2</span>
+          <h4>보장 공백</h4>
+          <p>암은 준비했는데 뇌·심장은 비어 있거나, 치료비는 있는데 소득 공백에 대한 대비가 없는 경우가 흔합니다.
+             전체 그림을 그려 보면 어디가 얇은지 바로 보입니다.</p>
+          <p class="hint">💡 “보험이 몇 개인가”보다 “어떤 상황에서 얼마가 나오는가”가 중요합니다.</p>
+        </div>
+        <div class="point-vis">
+          <p class="vis-title">보장 채움 정도 (예시)</p>
+          <div class="gap-list">
+            <div class="gap-item">
+              <div class="top"><span>암 진단비</span><em style="color:var(--good)">충분</em></div>
+              <div class="gap-track"><div class="gap-fill" style="width:88%;background:var(--good)"></div></div>
+            </div>
+            <div class="gap-item">
+              <div class="top"><span>뇌·심장 진단비</span><em style="color:var(--warn)">보완 필요</em></div>
+              <div class="gap-track"><div class="gap-fill" style="width:42%;background:var(--warn)"></div></div>
+            </div>
+            <div class="gap-item">
+              <div class="top"><span>실손의료비</span><em style="color:var(--good)">충분</em></div>
+              <div class="gap-track"><div class="gap-fill" style="width:82%;background:var(--good)"></div></div>
+            </div>
+            <div class="gap-item">
+              <div class="top"><span>후유장해</span><em style="color:var(--bad)">공백</em></div>
+              <div class="gap-track"><div class="gap-fill" style="width:14%;background:var(--bad)"></div></div>
+            </div>
+            <div class="gap-item">
+              <div class="top"><span>소득·생활비</span><em style="color:var(--bad)">공백</em></div>
+              <div class="gap-track"><div class="gap-fill" style="width:8%;background:var(--bad)"></div></div>
+            </div>
+          </div>
+          <p class="sample-note" style="margin-top:6px;text-align:right">※ 이해를 돕기 위한 가상 예시</p>
+        </div>
+      </div>
+
+      <!-- 3. 보험료 적정성 -->
+      <div class="point">
+        <div class="point-txt">
+          <span class="num">3</span>
+          <h4>보험료 적정성</h4>
+          <p>보장이 좋아도 매달 부담이 과하면 결국 해지로 이어집니다. 해지하는 순간 그동안의 보장도 함께 사라집니다.
+             지속 가능한 수준인지가 보장 설계의 전제입니다.</p>
+          <p class="hint">💡 일반적으로 월 소득의 <strong>8~10% 내외</strong>를 권고 기준으로 참고합니다. 다만 가족 구성·부채·소득 안정성에 따라 달라지므로 절대 기준은 아닙니다.</p>
+        </div>
+        <div class="point-vis">
+          <p class="vis-title">월 소득 대비 보험료 비중</p>
+          <div class="gauge">
+            <div class="gauge-track">
+              <i style="width:35%;background:var(--good)"></i>
+              <i style="width:25%;background:#a8cbb5"></i>
+              <i style="width:20%;background:var(--warn)"></i>
+              <i style="width:20%;background:var(--bad)"></i>
+            </div>
+            <div class="gauge-scale"><span>0%</span><span>7%</span><span>12%</span><span>16%</span><span>20%+</span></div>
+            <div class="gauge-legend">
+              <span><b style="background:var(--good)"></b>여유</span>
+              <span><b style="background:#a8cbb5"></b>적정</span>
+              <span><b style="background:var(--warn)"></b>부담</span>
+              <span><b style="background:var(--bad)"></b>과다</span>
+            </div>
+          </div>
+          <p class="sample-note" style="text-align:right;margin-top:4px">※ 일반적 권고 참고치이며 개인 상황에 따라 다릅니다</p>
+        </div>
+      </div>
+
+      <!-- 4. 갱신·만기 -->
+      <div class="point">
+        <div class="point-txt">
+          <span class="num">4</span>
+          <h4>갱신·만기 관리</h4>
+          <p>갱신형 보장은 나이가 들며 보험료가 오릅니다. 만기가 70세·80세로 설정돼 있으면, 정작 위험이 가장 큰 시기에 보장이 끝나 있을 수 있습니다.</p>
+          <p class="hint">💡 “지금 보험료가 싸다”보다 “언제까지, 얼마를 내고, 언제까지 보장되는가”를 봐야 합니다.</p>
+        </div>
+        <div class="point-vis">
+          <p class="vis-title">놓치기 쉬운 시점</p>
+          <div class="tl">
+            <div class="tl-item">
+              <span class="tl-dot"></span>
+              <div class="tl-body"><strong>가입 직후</strong><span>면책기간·감액기간 적용 구간</span></div>
+            </div>
+            <div class="tl-item warn">
+              <span class="tl-dot"></span>
+              <div class="tl-body"><strong>갱신 시점</strong><span>연령·위험률 반영으로 보험료 인상</span></div>
+            </div>
+            <div class="tl-item">
+              <span class="tl-dot"></span>
+              <div class="tl-body"><strong>납입 완료</strong><span>이후에도 보장이 유지되는 구조인지 확인</span></div>
+            </div>
+            <div class="tl-item warn">
+              <span class="tl-dot"></span>
+              <div class="tl-body"><strong>만기 도달</strong><span>보장 종료 → 이 시점의 공백 대비 필요</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────── 탭3 : 보장 Q&A ───────── -->
+    <div class="tab-panel" id="panel3" role="tabpanel" aria-labelledby="tab3" tabindex="0" hidden>
+      <div class="panel-intro">
+        <h3>보장에 대해 가장 많이 받는 질문</h3>
+        <p>상담 전에 알고 계시면 대화가 훨씬 빨라집니다.</p>
+      </div>
+
+      <div class="cq">
+        <div class="cq-item">
+          <button class="cq-q" aria-expanded="false" aria-controls="ca1">진단비와 실손의료비는 어떻게 다른가요?</button>
+          <div class="cq-a" id="ca1" hidden>
+            <strong>진단비</strong>는 진단이 확정되면 실제 치료비와 무관하게 정해진 금액을 받습니다. 치료비 외 생활비로도 쓸 수 있고, 여러 건 가입하면 각각 받습니다.<br>
+            <strong>실손의료비</strong>는 실제 병원에서 부담한 금액을 자기부담금 제외 후 보상합니다. 여러 개 가입해도 중복 보상되지 않고 비례 분담됩니다.<br>
+            둘은 대체 관계가 아니라 <strong>서로 다른 공백을 메우는 보장</strong>이라 함께 보는 것이 일반적입니다.
+          </div>
+        </div>
+        <div class="cq-item">
+          <button class="cq-q" aria-expanded="false" aria-controls="ca2">가입하면 바로 보장이 시작되나요?</button>
+          <div class="cq-a" id="ca2" hidden>
+            보장 종류에 따라 다릅니다. 암 진단비처럼 <strong>면책기간(대기기간)</strong>이 있는 보장은 계약일로부터 일정 기간이 지난 뒤부터 보장이 시작되고,
+            그 이후 일정 기간 내 진단 시 보험금이 <strong>감액 지급</strong>될 수 있습니다.
+            구체적인 기간과 감액 비율은 상품·특약별로 다르므로 약관에서 반드시 확인해야 합니다.
+          </div>
+        </div>
+        <div class="cq-item">
+          <button class="cq-q" aria-expanded="false" aria-controls="ca3">갱신형과 비갱신형, 어느 쪽이 유리한가요?</button>
+          <div class="cq-a" id="ca3" hidden>
+            일률적으로 어느 쪽이 유리하다고 말할 수 없습니다.<br>
+            <strong>갱신형</strong>은 초기 보험료가 낮지만 갱신마다 인상됩니다. <strong>비갱신형</strong>은 초기 보험료가 높지만 납입기간 동안 변동이 없습니다.<br>
+            납입 가능 기간, 보장이 필요한 시점, 소득 흐름에 따라 판단이 달라지므로 <strong>총 납입액과 보장 종료 시점을 함께 계산</strong>해 보는 것이 좋습니다.
+          </div>
+        </div>
+        <div class="cq-item">
+          <button class="cq-q" aria-expanded="false" aria-controls="ca4">유사암은 왜 따로 구분되나요?</button>
+          <div class="cq-a" id="ca4" hidden>
+            기타피부암·갑상선암·제자리암(상피내암)·경계성종양 등은 일반암과 치료 강도 및 예후가 달라
+            대부분 <strong>별도 항목으로 구분</strong>되고, 지급 금액도 일반암보다 낮게 설정되는 경우가 많습니다.
+            “암 진단비 가입했으니 다 되겠지”라고 생각했다가 실제로는 소액만 지급되는 사례가 여기서 나옵니다.
+          </div>
+        </div>
+        <div class="cq-item">
+          <button class="cq-q" aria-expanded="false" aria-controls="ca5">보장을 중복으로 가입해도 되나요?</button>
+          <div class="cq-a" id="ca5" hidden>
+            <strong>정액 보장(진단비·수술비·후유장해 등)</strong>은 중복 가입해도 각각 지급되므로, 필요에 따라 나눠 준비하는 것이 전략이 될 수 있습니다.<br>
+            반면 <strong>실손의료비</strong>는 여러 개 가입해도 실제 부담액을 넘어 받을 수 없어 중복 가입의 의미가 거의 없습니다.
+            현재 가입 내역을 확인하지 않고 추가하면 이 부분에서 손실이 발생합니다.
+          </div>
+        </div>
+        <div class="cq-item">
+          <button class="cq-q" aria-expanded="false" aria-controls="ca6">지금 보험을 해지하고 새로 드는 게 나을까요?</button>
+          <div class="cq-a" id="ca6" hidden>
+            <strong>대체로 신중해야 합니다.</strong> 기존 계약을 해지하고 새로 가입하는 과정에서
+            건강 상태 변화로 <strong>인수가 거절되거나, 보험료가 인상되거나, 보장 범위가 줄어들 수 있습니다.</strong>
+            또 해지 시 환급금이 납입액보다 적을 수 있고, 새 계약은 면책기간을 다시 시작합니다.<br>
+            그래서 저희는 <strong>기존 계약 유지를 기본 전제</strong>로 두고, 부족한 부분만 보완하는 방향을 먼저 검토합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 🆕 문서 버튼 3종 → 모달 ============ -->
+    <div class="docs">
+      <button type="button" class="doc-btn" onclick="openInfo('mChecklist')">
+        <span class="di">📋</span>
+        <span><strong>보장 점검 체크리스트</strong><span>10문항 · 1분 자가진단</span></span>
+      </button>
+      <button type="button" class="doc-btn" onclick="openInfo('mGlossary')">
+        <span class="di">📖</span>
+        <span><strong>보험 용어 사전</strong><span>헷갈리는 용어 12개 정리</span></span>
+      </button>
+      <button type="button" class="doc-btn" onclick="openInfo('mNotice')">
+        <span class="di">⚠️</span>
+        <span><strong>꼭 알아두실 사항</strong><span>상담 전 확인해 주세요</span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 진행 절차 ================= -->
+<section class="block bg-soft" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">진행 절차</span>
+      <h2>신청부터 보장 리포트까지 4단계</h2>
+      <p>복잡한 서류 준비 없이, 1분 신청으로 시작할 수 있습니다.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>신청서 작성</h4>
+        <p>이름·나이·연락처와 궁금한 보장을 남겨주세요. (약 1분)</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>상담 일정 조율</h4>
+        <p>담당 설계사가 연락드려 편한 시간을 함께 정합니다.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>보장 구조 분석</h4>
+        <p>중복·공백·보험료·갱신 4가지 축으로 진단합니다.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>리포트 전달</h4>
+        <p>보장 현황과 개선 방향을 문서로 정리해 보내드립니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     점검 사례 (가상 예시)
+     ⚠️ 이 섹션은 "실제 고객 후기"가 아닙니다. 절대 실제 후기라고
+        표기하지 마세요. 동의받은 실제 후기가 확보되면 교체하세요.
+============================================================ -->
+<section class="block" id="case">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">점검 사례</span>
+      <h2>이런 식으로 보장을 정리합니다</h2>
+      <p>실제 상담에서 자주 나오는 상황을 가상 사례로 구성했습니다.</p>
+    </div>
+    <div class="cases">
+      <div class="case">
+        <span class="who">30대 · 직장인 · 미혼</span>
+        <h4>실손은 3개, 진단비는 0원</h4>
+        <dl>
+          <dt>점검 전</dt>
+          <dd>실손의료비 성격 보장이 여러 건 중복. 정작 암·뇌·심장 진단비는 준비 없음.</dd>
+          <dt>정리 방향</dt>
+          <dd class="res">중복 구간 정리 → 확보된 여력을 진단비와 후유장해로 재배치</dd>
+        </dl>
+      </div>
+      <div class="case">
+        <span class="who">40대 · 자영업 · 자녀 2명</span>
+        <h4>보장은 있는데 만기가 70세</h4>
+        <dl>
+          <dt>점검 전</dt>
+          <dd>주요 진단비 만기가 70세. 위험이 가장 커지는 시기에 보장 종료 예정.</dd>
+          <dt>정리 방향</dt>
+          <dd class="res">기존 계약은 유지, 70세 이후 공백 구간만 별도로 보완</dd>
+        </dl>
+      </div>
+      <div class="case">
+        <span class="who">50대 · 부부</span>
+        <h4>치료비만 있고 생활비 대비 없음</h4>
+        <dl>
+          <dt>점검 전</dt>
+          <dd>치료비 보장은 충분하나, 치료 기간 소득 공백과 간병 부담에 대한 대비가 없음.</dd>
+          <dt>정리 방향</dt>
+          <dd class="res">보험료 증액 없이 특약 구성 조정으로 소득 보장 영역 확보 검토</dd>
+        </dl>
+      </div>
+    </div>
+    <p class="sample-note">
+      ※ 위 사례는 <strong>이해를 돕기 위해 구성한 가상 예시</strong>이며, 특정 고객의 실제 상담 내용이나 후기가 아닙니다.<br>
+      ※ 실제 점검 결과와 개선 방향은 개인의 가입 내역·건강 상태·소득 상황에 따라 전혀 달라질 수 있습니다.
+    </p>
+
+    <!-- ▼ 동의받은 실제 후기가 확보되면 이 주석을 풀고 위 .cases를 교체하세요.
+    <div class="reviews"> … 실제 후기 (작성자 동의 필수, 과장 표현 금지) … </div>
+    -->
+  </div>
+</section>
+
+<!-- ================= FAQ (서비스 관련) ================= -->
+<section class="block bg-soft" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">FAQ</span>
+      <h2>자주 묻는 질문</h2>
+      <p>서비스 이용에 대한 질문을 모았습니다. 보장 자체에 대한 질문은 위 <b>보장 Q&amp;A</b>를 확인해 주세요.</p>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" type="button">정말 비용이 전혀 들지 않나요? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>네, 보장 점검과 상담은 무료입니다. 리포트 제공까지 어떠한 비용도 청구되지 않습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">보험을 꼭 새로 가입해야 하나요? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>아닙니다. 현재 보장이 충분하다면 “그대로 유지하세요”라고 안내드립니다. 가입은 고객님의 선택이며 어떠한 강요도 없습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">가입한 보험 서류를 미리 준비해야 하나요? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>미리 준비하지 않으셔도 됩니다. 상담 과정에서 조회 방법을 안내드리며, 가입 내역을 확인할 수 있으면 점검이 더 정확해집니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">상담은 어떤 방식으로 진행되나요? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>기본은 전화 또는 메신저 상담이며, 원하시면 화상 또는 방문 상담도 가능합니다. 편한 방식을 선택해 주세요.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">개인정보는 안전하게 관리되나요? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>수집된 정보는 보장 점검 상담 목적으로만 사용되며, 상담 종료 후 3개월 내 파기됩니다. 동의 없이 제3자에게 제공되지 않습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">연락은 언제쯤 오나요? <span class="arrow">▼</span></button>
+        <div class="faq-a"><p>영업일 기준으로 순차적으로 연락드립니다. 야간·주말에 신청하신 경우 다음 영업일에 연락드립니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 하단 CTA ================= -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>내 보장이 어디까지 채워졌는지,<br>1분만 투자해 확인하세요</h2>
+    <p>지금 신청하면 담당 설계사가 순차적으로 연락드립니다.</p>
+    <a class="btn-white" href="#apply" onclick="goForm();return false;">무료 보장 점검 받기</a>
+  </div>
+</section>
+
+<!-- ================= 푸터 ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">차실장의 보험살롱</div>
+        <p>
+          ※ 사업자 정보 영역 — 정식 운영 시 실제 상호·대표자·사업자등록번호·<br>
+          보험대리점(또는 설계사) 등록번호·소속·주소·대표번호를 기재해야 합니다.<br>
+          (현재는 학습용 예시 페이지로, 실제 사업자 정보가 없습니다.)
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#">이용약관</a>
+        <button type="button" onclick="openInfo('mPrivacy')">개인정보처리방침</button>
+        <button type="button" onclick="openInfo('mNotice')">꼭 알아두실 사항</button>
+        <a href="#apply" onclick="goForm();return false;">보장 점검 신청</a>
+      </div>
+    </div>
+    <p class="copyright">
+      ※ 본 페이지는 학습·포트폴리오 목적의 예시이며 실제 보험 모집 행위를 하지 않습니다.<br>
+      ※ 본 페이지의 보장 설명은 일반적인 정보 제공을 위한 것으로, 특정 보험상품의 청약 권유가 아닙니다.<br>
+      ※ 정식 운영 시: 보험계약 체결 전 상품설명서 및 약관을 반드시 확인하시기 바랍니다.<br>
+      ※ 기존 계약 해지 후 신규 계약 체결 시 인수 거절, 보험료 인상, 보장 축소가 발생할 수 있습니다.<br>
+      © 2025 Demo Page.
+    </p>
+  </div>
+</footer>
+
+<!-- ================= 모바일 고정 CTA ================= -->
+<div class="mobile-bar">
+  <button type="button" class="mb-ghost" onclick="openInfo('mChecklist')">자가진단</button>
+  <button type="button" class="mb-main" onclick="goForm()">무료 보장 점검받기</button>
+</div>
+
+<!-- ============================================================
+     모달 ①  보장 점검 체크리스트 (인터랙티브)
+============================================================ -->
+<div class="modal" id="mChecklist" role="dialog" aria-modal="true" aria-labelledby="mChecklistT">
+  <div class="modal-lg">
+    <div class="ml-head">
+      <div>
+        <h3 id="mChecklistT">보장 점검 체크리스트</h3>
+        <p>해당되는 항목에 체크해 보세요. 체크가 많을수록 점검이 필요합니다.</p>
+      </div>
+      <button class="ml-x" type="button" data-close aria-label="닫기">×</button>
+    </div>
+    <div class="ml-body">
+      <div class="cl-list" id="clList">
+        <label class="cl-item"><input type="checkbox"><span>내 보험이 몇 개인지, 매달 얼마를 내는지 정확히 모른다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>암 진단비가 얼마인지 바로 답할 수 없다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>뇌·심장 관련 보장이 있는지 확실하지 않다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>실손의료비 보장이 2개 이상일 수 있다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>후유장해 보장이 무엇인지 들어본 적 없다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>치료 중 소득이 끊기는 상황에 대한 대비가 없다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>내 보장이 몇 세까지인지 모른다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>갱신형인지 비갱신형인지 구분할 수 없다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>최근 3년 안에 보험료가 오른 적이 있다</span></label>
+        <label class="cl-item"><input type="checkbox"><span>가입한 지 5년 이상 지났고 그 후 점검한 적이 없다</span></label>
+      </div>
+      <div class="cl-result">
+        <p class="cnt">체크한 항목 <b id="clCount">0</b> / 10</p>
+        <p class="msg" id="clMsg">항목을 체크하면 간단한 진단 코멘트를 보여드립니다.</p>
+      </div>
+      <div class="caution">
+        ※ 본 체크리스트는 보장 점검 필요 여부를 가늠하기 위한 <strong>간이 참고 도구</strong>입니다.
+        의학적·재무적 진단이 아니며, 결과에 따라 특정 상품의 가입이 필요하다는 의미도 아닙니다.
+      </div>
+    </div>
+    <div class="ml-foot">
+      <div class="row">
+        <button type="button" class="b-sub" data-close>닫기</button>
+        <button type="button" class="b-main" id="clToForm">결과와 함께 무료 점검 신청하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     모달 ②  보험 용어 사전
+============================================================ -->
+<div class="modal" id="mGlossary" role="dialog" aria-modal="true" aria-labelledby="mGlossaryT">
+  <div class="modal-lg">
+    <div class="ml-head">
+      <div>
+        <h3 id="mGlossaryT">보험 용어 사전</h3>
+        <p>상담 전에 이 12개만 알아두시면 충분합니다.</p>
+      </div>
+      <button class="ml-x" type="button" data-close aria-label="닫기">×</button>
+    </div>
+    <div class="ml-body">
+      <dl class="gl">
+        <div class="gl-item"><dt>정액 보장</dt><dd>조건이 충족되면 실제 지출과 무관하게 정해진 금액을 지급하는 방식. 진단비·수술비·후유장해 등이 해당합니다.</dd></div>
+        <div class="gl-item"><dt>실손 보장</dt><dd>실제로 부담한 금액을 한도 내에서 보상하는 방식. 자기부담금이 있고 중복 보상되지 않습니다.</dd></div>
+        <div class="gl-item"><dt>면책기간 (대기기간)</dt><dd>계약 후 일정 기간 동안 보장이 시작되지 않는 구간. 암 진단비 등에 적용되는 경우가 많습니다.</dd></div>
+        <div class="gl-item"><dt>감액기간</dt><dd>보장 개시 후 일정 기간 내 사고·진단 발생 시 보험금의 일부만 지급되는 구간입니다.</dd></div>
+        <div class="gl-item"><dt>갱신형 / 비갱신형</dt><dd>갱신형은 일정 주기마다 보험료가 재산출되어 인상될 수 있고, 비갱신형은 납입기간 동안 보험료가 고정됩니다.</dd></div>
+        <div class="gl-item"><dt>특약 (특별약관)</dt><dd>기본 계약에 추가로 붙이는 보장 단위. 특약 구성에 따라 보장 범위와 보험료가 크게 달라집니다.</dd></div>
+        <div class="gl-item"><dt>유사암</dt><dd>기타피부암·갑상선암·제자리암·경계성종양 등. 일반암과 구분되어 낮은 금액이 지급되는 경우가 많습니다.</dd></div>
+        <div class="gl-item"><dt>장해율</dt><dd>치료 후에도 남은 신체 기능 손상 정도를 백분율로 평가한 값. 후유장해 보험금은 이 비율에 따라 산정됩니다.</dd></div>
+        <div class="gl-item"><dt>계약 전 알릴 의무 (고지의무)</dt><dd>청약 시 건강 상태·병력 등을 사실대로 알려야 하는 의무. 위반하면 보험금 지급이 거절되거나 계약이 해지될 수 있습니다.</dd></div>
+        <div class="gl-item"><dt>해약환급금</dt><dd>계약을 중도 해지할 때 돌려받는 금액. 납입한 보험료보다 적거나, 구조에 따라 없을 수도 있습니다.</dd></div>
+        <div class="gl-item"><dt>납입면제</dt><dd>약관에서 정한 사유 발생 시 이후 보험료를 내지 않아도 보장이 유지되는 기능입니다.</dd></div>
+        <div class="gl-item"><dt>청약철회</dt><dd>계약 후 일정 기간 내에는 계약자가 청약을 철회하고 납입 보험료를 돌려받을 수 있는 제도입니다.</dd></div>
+      </dl>
+      <div class="caution">
+        ※ 위 설명은 이해를 돕기 위한 일반적 정의입니다. 실제 적용 범위와 요건은 개별 상품의 약관에 따라 다릅니다.
+      </div>
+    </div>
+    <div class="ml-foot">
+      <div class="row"><button type="button" class="b-main" data-close>확인</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     모달 ③  꼭 알아두실 사항
+============================================================ -->
+<div class="modal" id="mNotice" role="dialog" aria-modal="true" aria-labelledby="mNoticeT">
+  <div class="modal-lg">
+    <div class="ml-head">
+      <div>
+        <h3 id="mNoticeT">꼭 알아두실 사항</h3>
+        <p>상담을 신청하기 전에 한 번 읽어주세요.</p>
+      </div>
+      <button class="ml-x" type="button" data-close aria-label="닫기">×</button>
+    </div>
+    <div class="ml-body">
+      <h4>이 페이지의 성격</h4>
+      <ul>
+        <li>본 페이지는 <strong>보장 구조에 대한 일반 정보 제공</strong>과 상담 신청 접수를 위한 페이지이며, 특정 보험상품의 청약을 권유하지 않습니다.</li>
+        <li>보험료·가입금액·지급 조건은 개인의 나이·성별·직업·건강 상태 및 가입 시점에 따라 달라지므로, 이 페이지에서 확정 안내되지 않습니다.</li>
+      </ul>
+
+      <h4>계약을 검토하실 때</h4>
+      <ul>
+        <li><strong>계약 전 알릴 의무</strong> — 청약서상 질문에 사실대로 알리지 않으면 보험금 지급이 거절되거나 계약이 해지될 수 있습니다.</li>
+        <li><strong>면책·감액기간</strong> — 보장 종류에 따라 계약 후 일정 기간은 보장되지 않거나 감액 지급될 수 있습니다.</li>
+        <li><strong>기존 계약 해지</strong> — 기존 계약을 해지하고 새 계약을 체결하는 과정에서 인수가 거절되거나, 보험료가 인상되거나, 보장 내용이 축소될 수 있습니다.</li>
+        <li><strong>중도 해지</strong> — 해약환급금은 납입한 보험료보다 적거나 없을 수 있습니다.</li>
+        <li><strong>갱신형 보장</strong> — 갱신 시점의 연령·위험률 변동에 따라 보험료가 인상될 수 있습니다.</li>
+        <li><strong>청약철회</strong> — 계약 후 일정 기간 내에는 청약을 철회할 수 있습니다.</li>
+        <li><strong>보장 내용의 최종 기준은 약관</strong>입니다. 계약 체결 전 상품설명서와 약관을 반드시 확인하시기 바랍니다.</li>
+      </ul>
+
+      <div class="caution">
+        ⚠️ 정식 운영 시 이 영역에는 실제 소속 회사명·모집 자격·예금자보호 관련 안내 등
+        필수 고지사항을 정확히 기재해야 하며, 필요 시 준법 심의를 받아야 합니다.
+      </div>
+    </div>
+    <div class="ml-foot">
+      <div class="row"><button type="button" class="b-main" data-close>확인</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     모달 ④  개인정보 수집·이용 동의 전문
+============================================================ -->
+<div class="modal" id="mPrivacy" role="dialog" aria-modal="true" aria-labelledby="mPrivacyT">
+  <div class="modal-lg">
+    <div class="ml-head">
+      <div>
+        <h3 id="mPrivacyT">개인정보 수집·이용 동의</h3>
+        <p>상담 진행을 위해 아래 내용에 동의가 필요합니다.</p>
+      </div>
+      <button class="ml-x" type="button" data-close aria-label="닫기">×</button>
+    </div>
+    <div class="ml-body">
+      <h4>1. 수집 항목</h4>
+      <ul><li>이름, 나이, 성별, 연락처, 관심 보장 영역, 문의 내용</li></ul>
+      <h4>2. 수집·이용 목적</h4>
+      <ul><li>보장 점검 상담 진행, 상담 일정 조율, 진단 리포트 제공, 상담 이력 관리</li></ul>
+      <h4>3. 보유·이용 기간</h4>
+      <ul><li>상담 종료 후 <strong>3개월</strong>까지 보유하며, 기간 경과 시 지체 없이 파기합니다.</li></ul>
+      <h4>4. 동의를 거부할 권리</h4>
+      <ul><li>동의를 거부할 수 있으며, 거부 시 상담 서비스 제공이 제한됩니다.</li></ul>
+      <h4>5. 제3자 제공 및 처리위탁</h4>
+      <ul><li>정식 운영 시 상담을 수행하는 소속 대리점·설계사에게 제공되는 경우, 제공받는 자·목적·항목·보유기간을 이 항목에 명시해야 합니다.</li></ul>
+      <div class="caution">
+        ⚠️ 위 내용은 예시 템플릿입니다. 실제 운영 시 사업자의 개인정보처리방침과 일치하도록
+        수집 항목·보유기간·수탁사를 정확히 기재해야 합니다.
+      </div>
+    </div>
+    <div class="ml-foot">
+      <div class="row"><button type="button" class="b-main" data-close>확인</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 완료 모달 ================= -->
+<div class="modal" id="doneModal" role="dialog" aria-modal="true" aria-labelledby="doneT">
+  <div class="modal-box">
+    <div class="modal-ico">✓</div>
+    <h3 id="doneT">신청이 완료되었습니다!</h3>
+    <p id="doneText">담당 설계사가 곧 연락드릴 예정입니다.<br>조금만 기다려 주세요 😊</p>
+    <button type="button" onclick="closeModal()">확인</button>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   Google Apps Script 웹 앱 URL (배포 시 발급받은 /exec 주소)
+   ══════════════════════════════════════════════════════════════ */
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyzuTzXbybNDFOsnnfuVhUlX2rTYdAATb27BsRTZHp-4-cj7jC4RsLrNy4GfA_-E_Xa/exec';
+
+function isGasReady(){
+  return typeof GAS_URL === 'string' && GAS_URL.indexOf('/exec') !== -1;
+}
+
+const FORM_OPENED = Date.now();
+let todayCount = null;
+let badgeMin   = 5;
+let checkScore = null;   // 🆕 자가진단 체크 개수 (미사용 시 null)
+
+const $  = (s,c=document)=>c.querySelector(s);
+const $$ = (s,c=document)=>Array.prototype.slice.call(c.querySelectorAll(s));
+
+/* ---------- 스크롤 유틸 ---------- */
+function scrollToId(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - 90;
+  window.scrollTo({top:y, behavior:'smooth'});
+}
+function goForm(){
+  const el = document.getElementById('apply');
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  setTimeout(()=>document.getElementById('name').focus(), 550);
+}
+
+/* ---------- 오늘 신청 수 (배지) ---------- */
+async function loadTodayCount(){
+  if(!isGasReady()) return;
+  try{
+    const r = await fetch(GAS_URL + '?action=today');
+    const j = await r.json();
+    todayCount = Number(j.today) || 0;
+    badgeMin   = Number(j.min)   || 5;
+    renderBadge();
+  }catch(e){/* 실패 시 기본 문구 유지 */}
+}
+function renderBadge(){
+  const el = document.getElementById('badgeText');
+  if(!el || todayCount === null) return;
+  el.innerHTML = (todayCount >= badgeMin)
+    ? `오늘 <b>${todayCount}명</b>이 무료 보장 점검을 신청했어요`
+    : `지금 <b>무료</b>로 보장 점검받을 수 있어요`;
+}
+loadTodayCount();
+
+/* ============================================================
+   🆕 탭 전환
+============================================================ */
+const tabBtns = $$('.tab-btn');
+function selectTab(btn){
+  tabBtns.forEach(b=>{
+    const on = (b === btn);
+    b.setAttribute('aria-selected', on ? 'true' : 'false');
+    const p = document.getElementById(b.getAttribute('aria-controls'));
+    if(p) p.hidden = !on;
+  });
+}
+tabBtns.forEach((btn,i)=>{
+  btn.addEventListener('click', ()=>selectTab(btn));
+  btn.addEventListener('keydown', e=>{
+    const map = {ArrowRight:1, ArrowLeft:-1};
+    if(!(e.key in map)) return;
+    e.preventDefault();
+    const next = tabBtns[(i + map[e.key] + tabBtns.length) % tabBtns.length];
+    next.focus(); selectTab(next);
+  });
+});
+
+/* ============================================================
+   🆕 보장 Q&A 아코디언 (hidden 토글 방식 — 탭 안에서도 안전)
+============================================================ */
+$$('.cq-q').forEach(q=>{
+  q.addEventListener('click', ()=>{
+    const open = q.getAttribute('aria-expanded') === 'true';
+    q.setAttribute('aria-expanded', open ? 'false' : 'true');
+    const a = document.getElementById(q.getAttribute('aria-controls'));
+    if(a) a.hidden = open;
+  });
+});
+
+/* ============================================================
+   🆕 정보 모달 (포커스 트랩 · ESC · 딤 클릭)
+============================================================ */
+const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])';
+let lastFocused = null;
+
+function openInfo(id){
+  const m = document.getElementById(id);
+  if(!m) return;
+  lastFocused = document.activeElement;
+  m.classList.add('show');
+  document.body.classList.add('locked');
+  const f = m.querySelector(FOCUSABLE);
+  if(f) f.focus();
+  m.addEventListener('keydown', trapKey);
+}
+function closeInfo(m){
+  if(!m) return;
+  m.classList.remove('show');
+  m.removeEventListener('keydown', trapKey);
+  if(!$('.modal.show')) document.body.classList.remove('locked');
+  if(lastFocused) lastFocused.focus();
+}
+function trapKey(e){
+  if(e.key === 'Escape'){ closeInfo(e.currentTarget); return; }
+  if(e.key !== 'Tab') return;
+  const list = $$(FOCUSABLE, e.currentTarget).filter(el=>el.offsetParent !== null);
+  if(!list.length) return;
+  const first = list[0], last = list[list.length-1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+}
+/* 닫기 버튼 · 딤 클릭 바인딩 */
+$$('.modal').forEach(m=>{
+  $$('[data-close]', m).forEach(b=>b.addEventListener('click', ()=>closeInfo(m)));
+  m.addEventListener('click', e=>{ if(e.target === m) closeInfo(m); });
+});
+
+/* ============================================================
+   🆕 체크리스트 인터랙션
+============================================================ */
+const clBoxes = $$('#clList input[type=checkbox]');
+function renderChecklist(){
+  const n = clBoxes.filter(b=>b.checked).length;
+  $('#clCount').textContent = n;
+  const msg = $('#clMsg');
+  if(n === 0)      msg.textContent = '항목을 체크하면 간단한 진단 코멘트를 보여드립니다.';
+  else if(n <= 2)  msg.innerHTML   = '보장을 비교적 잘 파악하고 계십니다. 만기·갱신 시점만 한 번 더 확인해 보세요.';
+  else if(n <= 5)  msg.innerHTML   = '몇 가지 항목이 비어 있을 가능성이 있습니다. <strong>한 번 정리해 두면 도움이 됩니다.</strong>';
+  else if(n <= 8)  msg.innerHTML   = '중복이나 공백이 있을 확률이 높습니다. <strong>전체 보장 구조 점검을 권합니다.</strong>';
+  else             msg.innerHTML   = '현재 보장 상태를 거의 파악하지 못하고 계십니다. <strong>먼저 전체 현황 정리부터 시작하세요.</strong>';
+  checkScore = n;
+}
+clBoxes.forEach(b=>b.addEventListener('change', renderChecklist));
+
+/* 체크리스트 → 폼으로 결과 전달 */
+$('#clToForm').addEventListener('click', ()=>{
+  renderChecklist();
+  closeInfo(document.getElementById('mChecklist'));
+  const chip = $('#ckChip');
+  $('#ckChipText').innerHTML = `자가진단 결과 <b>${checkScore}/10</b> 항목이 함께 전달됩니다`;
+  chip.classList.add('show');
+  setTimeout(goForm, 250);
+});
+
+/* ---------- 전화번호 자동 하이픈 ---------- */
+$('#phone').addEventListener('input', e => {
+  let v = e.target.value.replace(/[^0-9]/g,'').slice(0,11);
+  if(v.length < 4)       e.target.value = v;
+  else if(v.length < 8)  e.target.value = v.slice(0,3)+'-'+v.slice(3);
+  else                   e.target.value = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7);
+});
+
+/* ---------- 나이 숫자만 ---------- */
+$('#age').addEventListener('input', e => {
+  e.target.value = e.target.value.replace(/[^0-9]/g,'').slice(0,3);
+});
+
+/* ---------- 유효성 검사 ---------- */
+function setError(id, on){
+  const el = document.getElementById(id);
+  if(el) el.classList.toggle('error', on);
+}
+function validate(){
+  let ok = true;
+
+  const name = $('#name').value.trim();
+  const nameBad = name.length < 2;
+  setError('f-name', nameBad); if(nameBad) ok = false;
+
+  const age = parseInt($('#age').value, 10);
+  const ageBad = isNaN(age) || age < 1 || age > 120;
+  setError('f-age', ageBad); if(ageBad) ok = false;
+
+  const phone = $('#phone').value.replace(/-/g,'');
+  const phoneBad = !/^01[016789][0-9]{7,8}$/.test(phone);
+  setError('f-phone', phoneBad); if(phoneBad) ok = false;
+
+  const agreeBad = !$('#agree').checked;
+  setError('f-agree', agreeBad); if(agreeBad) ok = false;
+
+  return ok;
+}
+['name','age','phone'].forEach(id=>{
+  $('#'+id).addEventListener('input', ()=>setError('f-'+id, false));
+});
+$('#agree').addEventListener('change', ()=>setError('f-agree', false));
+
+/* ---------- 알림 배너 ---------- */
+function showAlert(msg){
+  const box = $('#formAlert');
+  $('#formAlertText').textContent = msg;
+  box.classList.add('show');
+  box.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function hideAlert(){ $('#formAlert').classList.remove('show'); }
+
+/* ---------- 제출 처리 (Google Apps Script 전송) ---------- */
+$('#diagForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  hideAlert();
+
+  if(!validate()){
+    const firstErr = $('.field.error');
+    if(firstErr){
+      firstErr.scrollIntoView({behavior:'smooth', block:'center'});
+      const inp = firstErr.querySelector('input');
+      if(inp) inp.focus();
+    }
+    return;
+  }
+
+  if(!isGasReady()){
+    showAlert('전송 주소(GAS_URL)가 설정되지 않았습니다. 코드 상단의 GAS_URL을 확인해 주세요.');
+    return;
+  }
+
+  const payload = {
+    name:     $('#name').value.trim(),
+    age:      $('#age').value,
+    gender:   $('#gender').value,
+    phone:    $('#phone').value,
+    interest: $('#interest').value,          // 🆕 관심 보장 영역
+    checklist: checkScore,                    // 🆕 자가진단 점수 (미사용 시 null)
+    message:  $('#message').value.trim(),
+    agree:    $('#agree').checked,
+    hp:       ($('#hp') || {}).value || '',
+    elapsed:  Date.now() - FORM_OPENED,
+    utm:      Object.fromEntries(new URLSearchParams(location.search)),
+    ua:       navigator.userAgent
+  };
+
+  const btn = $('#submitBtn');
+  btn.disabled = true;
+  btn.textContent = '신청 중입니다...';
+
+  try{
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      /* ⚠️ application/json 으로 보내면 CORS 오류. text/plain 유지 필수 */
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+      redirect: 'follow'
+    });
+
+    const j = await res.json();
+
+    if(j.error === 'duplicate'){ showAlert('이미 접수된 번호입니다. 담당 설계사가 곧 연락드릴 예정이에요!'); return; }
+    if(j.error === 'invalid'){   showAlert('입력값을 다시 확인해 주세요.'); return; }
+    if(j.error === 'too_fast'){  showAlert('잠시 후 다시 시도해 주세요.'); return; }
+    if(!j.ok) throw new Error(j.error || 'fail');
+
+    if(typeof j.today === 'number'){ todayCount = j.today; renderBadge(); }
+
+    /* 전환 측정
+       if(window.gtag) gtag('event','generate_lead');
+       if(window.fbq)  fbq('track','Lead');                */
+
+    $('#doneText').innerHTML =
+      `<b>${payload.name}</b> 님, 신청이 접수되었습니다.<br>
+       입력하신 <b>${payload.phone}</b> 번호로<br>담당 설계사가 곧 연락드립니다 😊`;
+    $('#doneModal').classList.add('show');
+    document.body.classList.add('locked');
+    this.reset();
+    $('#ckChip').classList.remove('show');
+    clBoxes.forEach(b=>b.checked = false);
+    checkScore = null;
+    renderChecklist();
+
+  }catch(err){
+    console.error(err);
+    showAlert('일시적인 오류로 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+  }finally{
+    btn.disabled = false;
+    btn.textContent = '무료로 보장 점검받기';
+  }
+});
+
+/* ---------- 완료 모달 ---------- */
+function closeModal(){
+  $('#doneModal').classList.remove('show');
+  if(!$('.modal.show')) document.body.classList.remove('locked');
+}
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && $('#doneModal').classList.contains('show')) closeModal();
+});
+$('#doneModal').addEventListener('click', e=>{
+  if(e.target.id === 'doneModal') closeModal();
+});
+
+/* ---------- FAQ 아코디언 (항상 노출 영역) ---------- */
+$$('.faq-q').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const item = btn.parentElement;
+    const ans  = item.querySelector('.faq-a');
+    const isOpen = item.classList.contains('open');
+
+    $$('.faq-item').forEach(i=>{
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = null;
+    });
+
+    if(!isOpen){
+      item.classList.add('open');
+      ans.style.maxHeight = ans.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ---------- 스크롤 등장 애니메이션 ---------- */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      en.target.style.opacity = 1;
+      en.target.style.transform = 'none';
+      io.unobserve(en.target);
+    }
+  });
+},{threshold:.12});
+
+$$('.cov, .step, .case, .stat, .section-head, .doc-btn, .point').forEach((el,i)=>{
+  el.style.opacity = 0;
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = `opacity .55s ease ${(i%3)*0.08}s, transform .55s ease ${(i%3)*0.08}s`;
+  io.observe(el);
+});
+
+/* 초기 렌더 */
+renderChecklist();
+</script>
+</body>
+</html>
