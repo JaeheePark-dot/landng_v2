@@ -1414,7 +1414,7 @@ footer{background:#2c2438;color:#a9a3b8;padding:48px 0 34px;font-size:13.5px;}
 /* ══════════════════════════════════════════════════════════════
    Google Apps Script 웹 앱 URL (배포 시 발급받은 /exec 주소)
    ══════════════════════════════════════════════════════════════ */
-const GAS_URL = '여기에_새_배포_주소를_붙여넣으세요';   // ← 설치안내 5단계에서 받은 주소(…/exec)로 교체
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwpeHYgr2g9-rjkkJlKAZEe3w2y_xsW3q7cHBCywVjlwje_I7tTN2CTpVk8eiHb5MO1/exec';   // ← 설치안내 5단계에서 받은 주소(…/exec)로 교체
 
 function isGasReady(){
   return typeof GAS_URL === 'string' && GAS_URL.indexOf('/exec') !== -1;
