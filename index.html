@@ -221,6 +221,7 @@ section.block{padding:88px 0;}
   background:var(--purple-600);border-radius:3px 3px 0 0;
 }
 .tab-panel{padding:52px 0 0;animation:fade .32s ease;}
+.hl{background:var(--purple-100);padding:1px 2px;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
 .tab-panel[hidden]{display:none;}
 /* 접기 묶음 */
 .fold{border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:16px;overflow:hidden;}
@@ -1010,14 +1011,14 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
         <div class="cq-item">
           <button class="cq-q" aria-expanded="false" aria-controls="ca1">숨은 보험금, 저한테도 있을 수 있나요?</button>
           <div class="cq-a" id="ca1" hidden>
-            있을 수 있습니다. 숨은 보험금은 대부분 “이건 보험 대상이 아니겠지” 하고 넘긴 치료에서 생깁니다. 약만 처방받은 진단, 짧게 다녀온 통원 치료, <strong>건강검진 때 뗀 용종</strong>처럼요.<br>
+            있을 수 있습니다. 숨은 보험금은 대부분 “이건 보험 대상이 아니겠지” 하고 넘긴 치료에서 생깁니다. 약만 처방받은 진단, 짧게 다녀온 통원 치료, <strong class="hl">건강검진 때 뗀 용종</strong>처럼요.<br>
             보험금은 보통 <strong>3년 안에</strong> 청구할 수 있어서, 최근 3년 사이의 치료라면 지금이라도 확인해 볼 수 있습니다.
           </div>
         </div>
         <div class="cq-item">
           <button class="cq-q" aria-expanded="false" aria-controls="ca2">입원도 수술도 안 하고 약만 먹는데, 보험금이 나오나요?</button>
           <div class="cq-a" id="ca2" hidden>
-            진단비는 입원이나 수술 여부와 상관없이, <strong>약관에서 정한 진단이 확정되면</strong> 지급됩니다. 위 실제 사례처럼 협심증 진단 후 약만 드시던 분이 진단비를 받으신 경우도 있습니다.<br>
+            진단비는 입원이나 수술 여부와 상관없이, <strong class="hl">약관에서 정한 진단이 확정되면</strong> 지급됩니다. 위 실제 사례처럼 협심증 진단 후 약만 드시던 분이 진단비를 받으신 경우도 있습니다.<br>
             다만 같은 심장 진단비라도 보장하는 질병 범위가 상품마다 달라, <strong>내 보험이 어디까지 보장하는지가 핵심</strong>입니다.
           </div>
         </div>
@@ -1025,41 +1026,41 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
           <button class="cq-q" aria-expanded="false" aria-controls="ca3">보험료는 매달 내는데, 막상 아프면 얼마나 나오나요?</button>
           <div class="cq-a" id="ca3" hidden>
             가진 보험에 따라 크게 다릅니다. 진단만 받으면 정해진 금액이 나오는 보장, 수술·입원할 때 나오는 보장, 실제 쓴 병원비만큼 나오는 실비가 섞여 있어서, 같은 병이라도 받는 금액이 사람마다 달라집니다.<br>
-            보험을 하나씩 보는 것보다 <strong>질병·상황별로 얼마가 나오는지</strong> 정리해 보면, 빈 곳과 겹친 곳이 바로 보입니다.
+            보험을 하나씩 보는 것보다 <strong class="hl">질병·상황별로 얼마가 나오는지</strong> 정리해 보면, 빈 곳과 겹친 곳이 바로 보입니다.
           </div>
         </div>
         <div class="cq-item">
           <button class="cq-q" aria-expanded="false" aria-controls="ca4">실비 보험이랑 진단비 보험, 뭐가 다른가요?</button>
           <div class="cq-a" id="ca4" hidden>
             <strong>진단비</strong>는 진단을 받으면 실제 병원비와 상관없이 정해진 금액이 나오고, 여러 개 가입했다면 각각 받습니다.<br>
-            <strong>실비</strong>는 실제로 쓴 병원비만큼 나오고, 여러 개 가입해도 더 받지 못하고 나눠서 받습니다. 그래서 실비가 여러 개라면 <strong>보험료만 더 내고 있을 수 있습니다.</strong>
+            <strong>실비</strong>는 실제로 쓴 병원비만큼 나오고, 여러 개 가입해도 더 받지 못하고 나눠서 받습니다. 그래서 실비가 여러 개라면 <strong class="hl">보험료만 더 내고 있을 수 있습니다.</strong>
           </div>
         </div>
         <div class="cq-item">
           <button class="cq-q" aria-expanded="false" aria-controls="ca5">암 보험이 있는데, 표적항암 같은 비싼 치료비도 나오나요?</button>
           <div class="cq-a" id="ca5" hidden>
             암 진단비는 진단을 받을 때 정해진 금액이 나오는 보장이라, 어떤 치료를 받는지와는 별개입니다.<br>
-            표적항암·면역항암, 로봇수술, 중입자 치료처럼 비용이 큰 치료는 <strong>이를 따로 보장하는 특약</strong>이 있어야 치료비를 추가로 받을 수 있습니다. 예전에 가입한 암 보험에는 이런 보장이 빠져 있을 수 있어 확인이 필요합니다.
+            표적항암·면역항암, 로봇수술, 중입자 치료처럼 비용이 큰 치료는 <strong class="hl">이를 따로 보장하는 특약</strong>이 있어야 치료비를 추가로 받을 수 있습니다. 예전에 가입한 암 보험에는 이런 보장이 빠져 있을 수 있어 확인이 필요합니다.
           </div>
         </div>
         <div class="cq-item">
           <button class="cq-q" aria-expanded="false" aria-controls="ca6">뇌·심장 보험 있으면 다 되는 거 아닌가요?</button>
           <div class="cq-a" id="ca6" hidden>
             그렇지 않습니다. 같은 뇌·심장 보험도 보장 범위가 다릅니다. 뇌졸중 진단비는 뇌출혈·뇌경색 위주라 뇌동맥류 같은 질환은 빠질 수 있고, 급성심근경색 진단비는 협심증을 보장하지 않습니다.<br>
-            반면 뇌혈관질환·허혈성심장질환 진단비는 범위가 더 넓습니다. 보험 이름보다 <strong>“어디까지 보장하는지”</strong>를 확인해야 합니다.
+            반면 뇌혈관질환·허혈성심장질환 진단비는 범위가 더 넓습니다. 보험 이름보다 <strong class="hl">“어디까지 보장하는지”</strong>를 확인해야 합니다.
           </div>
         </div>
         <div class="cq-item">
           <button class="cq-q" aria-expanded="false" aria-controls="ca7">입원하면 간병인 비용이 걱정인데, 보험으로 준비할 수 있나요?</button>
           <div class="cq-a" id="ca7" hidden>
-            준비할 수 있습니다. 입원 중 간병인을 쓰면 <strong>하루 단위로 간병비를 받는 방식</strong>과, <strong>보험사가 간병인을 보내주는 방식</strong>이 있습니다.<br>
+            준비할 수 있습니다. 입원 중 간병인을 쓰면 <strong>하루 단위로 간병비를 받는 방식</strong>과, <strong class="hl">보험사가 간병인을 보내주는 방식</strong>이 있습니다.<br>
             상품마다 지급 조건과 금액, 보장 기간이 달라 내 상황에 맞는 방식을 고르는 것이 중요합니다. 예전 보험에는 간병 보장이 없는 경우가 있어 함께 점검해 드립니다.
           </div>
         </div>
         <div class="cq-item">
           <button class="cq-q" aria-expanded="false" aria-controls="ca8">부모님 보험도 같이 점검받을 수 있나요?</button>
           <div class="cq-a" id="ca8" hidden>
-            네, <strong>오히려 꼭 함께 보시길 권합니다.</strong> 부모님 연세에는 입원과 간병이 가장 현실적인 걱정입니다. 입원하셨을 때 간병 보장이 있느냐 없느냐에 따라, <strong>간병비를 누가 부담하게 되는지가 달라집니다.</strong><br>
+            네, <strong>오히려 꼭 함께 보시길 권합니다.</strong> 부모님 연세에는 입원과 간병이 가장 현실적인 걱정입니다. 입원하셨을 때 간병 보장이 있느냐 없느냐에 따라, <strong class="hl">간병비를 누가 부담하게 되는지가 달라집니다.</strong><br>
             부모님 동의만 있으면 직접 오시지 않아도 함께 점검해 드리고, 이미 받을 수 있었는데 놓친 보험금이 없는지도 같이 확인해 드립니다.
           </div>
         </div>
@@ -1135,7 +1136,7 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
           <dt>점검 전</dt>
           <dd>협심증 진단을 받고 약만 처방받아, 보험금 받을 일이 없다고 생각함. 본인 진단명이 협심증이라는 것도 모르고 있었음.</dd>
           <dt>정리 방향</dt>
-          <dd class="res">진료 기록으로 진단명 확인 → 심장 진단비 보장 범위 확인 → 진단비 청구·수령</dd>
+          <dd class="res">진료 기록으로 진단명 확인 → 심장 진단비 보장 범위 확인 → <span class="hl">진단비 청구·수령</span></dd>
         </dl>
       </div>
       <div class="case">
@@ -1145,7 +1146,7 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
           <dt>점검 전</dt>
           <dd>오래전 가입한 보험으로 보험료 부담은 큰데, 심장 수술 보장은 얇고 최신 치료비 보장은 없었음.</dd>
           <dt>정리 방향</dt>
-          <dd class="res">기존 계약은 일부 유지하고 일부 조정해 보험료 부담을 낮추면서, 수술비를 여러 겹으로 설계하고 중환자실 치료비 등 최신 치료비 보장 추가 → 이후 죽상경화성 심장질환 수술 때 수술비와 최신 치료비(중환자실 치료비)가 함께 지급됨</dd>
+          <dd class="res">기존 계약은 일부 유지하고 일부 조정해 보험료 부담을 낮추면서, 수술비를 여러 겹으로 설계하고 중환자실 치료비 등 최신 치료비 보장 추가 → 이후 죽상경화성 심장질환 수술 때 <span class="hl">수술비와 최신 치료비(중환자실 치료비)가 함께 지급됨</span></dd>
         </dl>
       </div>
       <div class="case">
@@ -1155,7 +1156,7 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
           <dt>점검 전</dt>
           <dd>뇌 관련 진단비가 뇌졸중에만 한정되어 있어, 뇌동맥류처럼 뇌졸중이 아닌 뇌혈관 질환은 보장받을 수 없는 상태였음.</dd>
           <dt>정리 방향</dt>
-          <dd class="res">기존 계약은 일부 유지하고 일부 조정해 뇌혈관 질환 전반으로 보장 범위를 넓힘 → 이후 건강검진에서 뇌동맥류가 발견되어, 일상생활에 지장이 없는 상태에서 진단비 수령</dd>
+          <dd class="res">기존 계약은 일부 유지하고 일부 조정해 뇌혈관 질환 전반으로 보장 범위를 넓힘 → 이후 건강검진에서 뇌동맥류가 발견되어, <span class="hl">일상생활에 지장이 없는 상태에서 진단비 수령</span></dd>
         </dl>
       </div>
     </div>
