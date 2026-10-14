@@ -233,6 +233,9 @@ section.block{padding:88px 0;}
   box-shadow:var(--shadow-sm);transition:.2s;
 }
 .scroll-cue button:hover{border-color:var(--purple-300);color:var(--purple-700);}
+.scroll-cue button{background:#ffe066;border-color:#f2c94c;color:var(--text);font-weight:800;font-size:15.5px;box-shadow:0 8px 22px rgba(242,180,0,.28);}
+.scroll-cue button:hover{background:#ffd633;border-color:#e6b800;color:var(--text);}
+.hl-y{font-weight:800;color:var(--text);background:linear-gradient(transparent 52%,#ffe066 52%);padding:0 2px;}
 .scroll-cue .arw{animation:bob 1.5s ease-in-out infinite;}
 @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
 
@@ -301,6 +304,19 @@ section.block{padding:88px 0;}
 .type-real{background:#eaeef8;color:#45598f;}
 
 /* 정액 vs 실손 비교 */
+.vs-head{margin-top:56px;padding-top:34px;border-top:2px dashed var(--line);text-align:center;}
+.vs-head span{display:inline-block;font-size:12.5px;font-weight:700;color:var(--purple-600);background:var(--purple-100);padding:4px 12px;border-radius:999px;margin-bottom:10px;}
+.vs-head strong{display:block;font-size:19px;font-weight:800;color:var(--text);letter-spacing:-.5px;}
+.vs-of{font-size:12.5px;color:var(--text-sub);margin-bottom:12px;line-height:1.6;}
+.vs2{margin:18px auto 0;max-width:620px;background:var(--purple-50);border-radius:var(--radius);padding:6px 14px;}
+.vs2-row{display:grid;grid-template-columns:66px 1fr 1fr;gap:6px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--text-sub);text-align:center;}
+.vs2-row:last-child{border-bottom:none;}
+.vs2-row b{color:var(--text);font-weight:800;}
+.vs2-k{text-align:left;font-size:13px;font-weight:700;color:var(--text);}
+.vs2-row>span{white-space:nowrap;}
+.vs2-k{white-space:normal!important;line-height:1.4;}
+.vs2-top .kicker{justify-self:center;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;}
+.vs.vs{margin-top:18px;background:var(--purple-50);border:none;box-shadow:none;}
 .vs{
   margin-top:36px;display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;
   background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;
@@ -679,9 +695,9 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
         지금 가진 보장이 어디까지 채워져 있는지 정리해 드립니다.
       </p>
       <ul class="hero-check">
-        <li><span class="ck">✓</span> 특정 상품 권유가 아닌 <strong>보장 구조 진단</strong></li>
-        <li><span class="ck">✓</span> 중복·공백·과납 구간을 한 장으로 정리</li>
-        <li><span class="ck">✓</span> 유지가 낫다면 “그대로 두세요”라고 말씀드립니다</li>
+        <li><span class="ck">✓</span><span>특정 상품 권유가 아닌 <strong class="hl-y">보장 구조 진단</strong></span></li>
+        <li><span class="ck">✓</span><span>중복·공백·과납 구간을 한 장으로 정리</span></li>
+        <li><span class="ck">✓</span><span>유지가 낫다면 “그대로 두세요”라고 말씀드립니다</span></li>
       </ul>
       <div class="hero-cta">
         <button class="btn-primary" type="button" onclick="goForm()">무료 보장 점검 신청 →</button>
@@ -735,8 +751,8 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
         </div>
 
         <div class="field" id="f-org">
-          <label for="org">회사명 · 소속</label>
-          <input type="text" id="org" name="org" placeholder="예) ○○전자 (없으면 비워두세요)" maxlength="40" autocomplete="off">
+          <label for="org">직업</label>
+          <input type="text" id="org" name="org" placeholder="예) 사무직, 자영업, 현장직" maxlength="40" autocomplete="off">
         </div>
 
         <div class="field" id="f-phone">
@@ -770,7 +786,7 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
           <div>
             <label for="agree">
               <b>[필수]</b> 개인정보 수집·이용에 동의합니다.
-              수집 항목: 이름, 생년월일, 성별, 연락처, 회사명·소속, 관심 보장, 문의내용 / 목적: 보장 점검 상담 / 보유기간: 상담 종료 후 3개월
+              수집 항목: 이름, 생년월일, 성별, 연락처, 직업, 관심 보장, 문의내용 / 목적: 보장 점검 상담 / 보유기간: 상담 종료 후 3개월
             </label>
             <button type="button" class="agree-more" onclick="openInfo('mPrivacy')">동의 내용 전문 보기</button>
           </div>
@@ -1147,29 +1163,13 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
         </div>
       </div>
 
-      <!-- 정액 vs 실손 -->
-      <div class="vs">
-        <div class="vs-col">
-          <span class="kicker type-fixed">정액 보장</span>
-          <h5>진단·수술·장해 등</h5>
-          <ul>
-            <li>조건 충족 시 <strong>정해진 금액</strong>을 지급</li>
-            <li>치료비 외 생활비·간병비로 자유롭게 사용</li>
-            <li><strong>여러 건 가입 시 각각 지급</strong>(중복 수령 가능)</li>
-            <li>진단 요건·면책기간을 반드시 확인해야 함</li>
-          </ul>
-        </div>
-        <div class="vs-div" aria-hidden="true"></div>
-        <div class="vs-col">
-          <span class="kicker type-real">실손 보장</span>
-          <h5>실손의료비</h5>
-          <ul>
-            <li>실제 지출한 금액을 <strong>한도 내에서 보상</strong></li>
-            <li>자기부담금이 발생</li>
-            <li><strong>여러 건 가입해도 중복 보상 안 됨</strong> (비례 분담)</li>
-            <li>갱신 시 보험료 변동 폭이 큼</li>
-          </ul>
-        </div>
+      <!-- 정액 vs 실손 (카드가 아닌 비교표) -->
+      <div class="vs-head"><span>한눈에 비교</span><strong>정액 보장 vs 실손 보장, 무엇이 다를까요?</strong></div>
+      <div class="vs2">
+        <div class="vs2-row vs2-top"><span></span><span class="kicker type-fixed">정액 보장</span><span class="kicker type-real">실손 보장</span></div>
+        <div class="vs2-row"><span class="vs2-k">받는 돈</span><span><b>정해진 금액</b></span><span><b>쓴 만큼</b></span></div>
+        <div class="vs2-row"><span class="vs2-k">여러 개<br>가입하면</span><span><b>각각</b> 받음</span><span>나눠 받음</span></div>
+        <div class="vs2-row"><span class="vs2-k">해당 카드</span><span>5가지</span><span>실손의료비</span></div>
       </div>
       <p class="sample-note">※ 위 분류는 이해를 돕기 위한 일반적인 설명입니다. 실제 보장 여부와 지급 조건은 개별 약관에 따릅니다.</p>
     </div>
@@ -1438,7 +1438,7 @@ footer{background:#241c20;color:#b3a9ae;padding:48px 0 34px;font-size:13.5px;}
     </div>
     <div class="ml-body">
       <h4>1. 수집 항목</h4>
-      <ul><li>이름, 생년월일, 성별, 연락처, 회사명·소속, 관심 보장 영역, 문의 내용</li></ul>
+      <ul><li>이름, 생년월일, 성별, 연락처, 직업, 관심 보장 영역, 문의 내용</li></ul>
       <h4>2. 수집·이용 목적</h4>
       <ul><li>보장 점검 상담 진행, 상담 일정 조율, 분석 결과 안내, 상담 이력 관리</li></ul>
       <h4>3. 보유·이용 기간</h4>
@@ -1488,9 +1488,7 @@ const FORM_OPENED = Date.now();
 const QS  = new URLSearchParams(location.search);
 const SRC = (QS.get('src') || QS.get('utm_source') || '').trim().slice(0,40);
 (function(){
-  const org = (QS.get('org') || '').trim().slice(0,40);
-  const el  = document.getElementById('org');
-  if(org && el) el.value = org;
+  /* 직업 칸으로 바뀌어 ?org= 자동 입력은 사용하지 않습니다 */
 })();
 let todayCount = null;
 let badgeMin   = 5;
@@ -1716,7 +1714,7 @@ $('#diagForm').addEventListener('submit', async function(e){
     birth:    $('#birth').value,              // 생년월일 (YYYY-MM-DD)
     gender:   $('#gender').value,
     phone:    $('#phone').value,
-    org:      $('#org').value.trim(),         // 회사명·소속
+    org:      $('#org').value.trim(),         // 직업 (시트 3번째 칸)
     src:      SRC,                            // 유입경로 (QR 구분값)
     interest: $('#interest').value,          // 🆕 관심 보장 영역
     checklist: $('#ckChip').classList.contains('show') ? checkScore : null,                    // 🆕 자가진단 점수 (미사용 시 null)
